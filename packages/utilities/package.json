@@ -1,0 +1,40 @@
+{
+  "name": "@rebul/utilities",
+  "version": "0.0.0",
+  "description": "Utilities module for @rebul components",
+  "main": "lib/index",
+  "typings": "lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/panjiesw/rebul.git"
+  },
+  "keywords": [
+    "rebul",
+    "base",
+    "typestyle"
+  ],
+  "author": "Panjie Setiawan Wicaksono",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/panjiesw/rebul/issues"
+  },
+  "homepage": "https://github.com/panjiesw/rebul#readme",
+  "scripts": {
+    "test": "run-s t:*"
+  },
+  "devDependencies": {
+    "@types/node": "8.9.1",
+    "@types/react": "^16.0.38",
+    "@types/react-dom": "^16.0.4",
+    "del-cli": "^1.1.0",
+    "npm-run-all": "^4.1.2",
+    "tslint": "^5.9.1",
+    "tslint-config-prettier": "^1.8.0",
+    "tslint-react": "^3.5.1",
+    "typescript": "^2.7.1"
+  },
+  "dependencies": {
+    "csx": "^8.5.0",
+    "typestyle": "^1.7.1"
+  }
+}

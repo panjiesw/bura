@@ -1,0 +1,39 @@
+{
+  "private": true,
+  "name": "rebul",
+  "version": "0.0.0",
+  "description": "Set of React Components using Bulma and TypeStyle",
+  "workspaces": [
+    "packages/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/panjiesw/rebul.git"
+  },
+  "keywords": [
+    "react",
+    "typescript",
+    "bulma",
+    "typestyle"
+  ],
+  "author": "Panjie Setiawan Wicaksono <panjie@panjiesw.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/panjiesw/rebul/issues"
+  },
+  "homepage": "https://github.com/panjiesw/rebul#readme",
+  "scripts": {
+    "test": "run-p t:*"
+  },
+  "devDependencies": {
+    "husky": "^0.14.3",
+    "lerna": "^2.8.0",
+    "lint-staged": "^6.1.0",
+    "npm-run-all": "^4.1.2",
+    "prettier": "^1.10.2",
+    "tslint": "^5.9.1",
+    "tslint-config-prettier": "^1.8.0",
+    "tslint-react": "^3.5.1",
+    "typescript": "^2.7.1"
+  }
+}

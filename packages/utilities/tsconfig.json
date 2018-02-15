@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "removeComments": true,
+    "sourceMap": true,
+    "rootDir": "src",
+    "outDir": "es"
+  },
+  "exclude": [
+    "node_modules",
+    "es",
+    "lib",
+    "umd"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "private": true,
+  "name": "@rebul/project-template",
+  "version": "0.0.0",
+  "description": "Empty project template for internal use in @rebul development",
+  "module": "es/index",
+  "main": "lib/index",
+  "typings": "lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/panjiesw/rebul.git"
+  },
+  "keywords": [
+    "rebul",
+    "typestyle"
+  ],
+  "author": "Panjie Setiawan Wicaksono",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/panjiesw/rebul/issues"
+  },
+  "homepage": "https://github.com/panjiesw/rebul#readme",
+  "scripts": {
+    "test": "run-s t:*"
+  }
+}
