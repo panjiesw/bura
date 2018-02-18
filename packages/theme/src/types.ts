@@ -195,7 +195,15 @@ export interface IBuraAnimation {
   spinAround: string;
 }
 
+export interface IBuraMixinClass {
+  deleteSmall: string;
+  deleteMedium: string;
+  deleteLarge: string;
+  hamburgerActive: string;
+}
+
 export interface IBuraMixin {
+  readonly classes: IBuraMixinClass;
   arrow(color: ColorHelper): NestedCSSProperties;
   block(): NestedCSSProperties;
   clearfix(): NestedCSSProperties;
@@ -219,11 +227,6 @@ export interface IBuraMixin {
   widescreen(css: NestedCSSProperties): NestedCSSProperties;
   widescreenOnly(css: NestedCSSProperties): NestedCSSProperties;
   fullhd(css: NestedCSSProperties): NestedCSSProperties;
-
-  hamburgerActiveClass(): string;
-  deleteSmallClass(): string;
-  deleteMediumClass(): string;
-  deleteLargeClass(): string;
 }
 
 export interface IBuraTheme {

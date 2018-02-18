@@ -14,7 +14,8 @@
     "strict": true,
     "strictFunctionTypes": true,
     "strictNullChecks": true,
-    "suppressImplicitAnyIndexErrors": true
+    "suppressImplicitAnyIndexErrors": true,
+    "esModuleInterop": true
   },
   "exclude": [
     "node_modules"

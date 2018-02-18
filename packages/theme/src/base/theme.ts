@@ -14,10 +14,7 @@
  *    limitations under the License.
  */
 
-import {
-  deg,
-  rotate,
-} from 'csx';
+import { deg, rotate } from 'csx';
 import { keyframes } from 'typestyle';
 import {
   IBuraAnimation,
@@ -38,11 +35,11 @@ import {
   IBuraTypo,
   IBuraVariable,
 } from '../types';
-import derivedVars from './derived';
-import BaseMixin from './mixins';
-import vars from './vars';
+import { derivedVars } from './derived';
+import { BuraBaseMixin } from './mixins';
+import { vars } from './vars';
 
-class BuraBaseTheme implements IBuraTheme {
+export class BuraBaseTheme implements IBuraTheme {
   protected _vars: IBuraVariable;
   protected _derivedVars: IBuraDerivedVariable;
   protected _animations: IBuraAnimation;
@@ -61,7 +58,7 @@ class BuraBaseTheme implements IBuraTheme {
         },
       }),
     };
-    this._mixins = new BaseMixin(this);
+    this._mixins = new BuraBaseMixin(this);
   }
 
   get vars(): IBuraVariable {
@@ -84,7 +81,8 @@ class BuraBaseTheme implements IBuraTheme {
     this._vars = {
       ...this._vars,
       ...variables,
-    }
+    };
+    this._derivedVars = derivedVars(this);
     return this;
   }
 
@@ -92,7 +90,7 @@ class BuraBaseTheme implements IBuraTheme {
     this._derivedVars = {
       ...this._derivedVars,
       ...variables,
-    }
+    };
     return this;
   }
 
@@ -100,7 +98,7 @@ class BuraBaseTheme implements IBuraTheme {
     this._animations = {
       ...this._animations,
       ...animations,
-    }
+    };
     return this;
   }
 
@@ -113,7 +111,8 @@ class BuraBaseTheme implements IBuraTheme {
     this._vars = {
       ...this._vars,
       ...colors,
-    }
+    };
+    this._derivedVars = derivedVars(this);
     return this;
   }
 
@@ -121,7 +120,8 @@ class BuraBaseTheme implements IBuraTheme {
     this._vars = {
       ...this._vars,
       ...typo,
-    }
+    };
+    this._derivedVars = derivedVars(this);
     return this;
   }
 
@@ -129,7 +129,8 @@ class BuraBaseTheme implements IBuraTheme {
     this._vars = {
       ...this._vars,
       ...responsive,
-    }
+    };
+    this._derivedVars = derivedVars(this);
     return this;
   }
 
@@ -137,7 +138,8 @@ class BuraBaseTheme implements IBuraTheme {
     this._vars = {
       ...this._vars,
       ...misc,
-    }
+    };
+    this._derivedVars = derivedVars(this);
     return this;
   }
 
@@ -145,7 +147,8 @@ class BuraBaseTheme implements IBuraTheme {
     this._vars = {
       ...this._vars,
       ...flags,
-    }
+    };
+    this._derivedVars = derivedVars(this);
     return this;
   }
 
@@ -153,7 +156,7 @@ class BuraBaseTheme implements IBuraTheme {
     this._derivedVars = {
       ...this._derivedVars,
       ...colors,
-    }
+    };
     return this;
   }
 
@@ -163,7 +166,7 @@ class BuraBaseTheme implements IBuraTheme {
     this._derivedVars = {
       ...this._derivedVars,
       ...colors,
-    }
+    };
     return this;
   }
 
@@ -173,7 +176,7 @@ class BuraBaseTheme implements IBuraTheme {
     this._derivedVars = {
       ...this._derivedVars,
       ...colors,
-    }
+    };
     return this;
   }
 
@@ -183,7 +186,7 @@ class BuraBaseTheme implements IBuraTheme {
     this._derivedVars = {
       ...this._derivedVars,
       ...colors,
-    }
+    };
     return this;
   }
 
@@ -193,7 +196,7 @@ class BuraBaseTheme implements IBuraTheme {
     this._derivedVars = {
       ...this._derivedVars,
       ...colors,
-    }
+    };
     return this;
   }
 
@@ -203,7 +206,7 @@ class BuraBaseTheme implements IBuraTheme {
     this._derivedVars = {
       ...this._derivedVars,
       ...colors,
-    }
+    };
     return this;
   }
 
@@ -211,9 +214,7 @@ class BuraBaseTheme implements IBuraTheme {
     this._derivedVars = {
       ...this._derivedVars,
       ...typo,
-    }
+    };
     return this;
   }
 }
-
-export default BuraBaseTheme;

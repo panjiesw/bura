@@ -93,12 +93,10 @@ const misc: IBuraMisc = {
 
 const flags: IBuraFlag = {variableColumns: true}
 
-const vars: IBuraVariable = {
+export const vars: IBuraVariable = {
   ...colors,
   ...typo,
   ...responsive,
   ...misc,
   ...flags,
 };
-
-export default vars;

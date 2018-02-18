@@ -28,10 +28,60 @@ import {
 } from 'csx/lib';
 import { media, style } from 'typestyle';
 import { NestedCSSProperties } from 'typestyle/lib/types';
-import { IBuraMixin, IBuraTheme } from '../types';
+import { IBuraMixin, IBuraMixinClass, IBuraTheme } from '../types';
 
-class BaseMixin implements IBuraMixin {
-  constructor(protected theme: IBuraTheme) {}
+export class BuraBaseMixin implements IBuraMixin {
+  private _classes: IBuraMixinClass;
+
+  constructor(protected theme: IBuraTheme) {
+    this._classes = {
+      deleteLarge: style({
+        height: px(32),
+        maxHeight: px(32),
+        maxWidth: px(32),
+        minHeight: px(32),
+        minWidth: px(32),
+        width: px(32),
+      }),
+      deleteMedium: style({
+        height: px(24),
+        maxHeight: px(24),
+        maxWidth: px(24),
+        minHeight: px(24),
+        minWidth: px(24),
+        width: px(24),
+      }),
+      deleteSmall: style({
+        height: px(16),
+        maxHeight: px(16),
+        maxWidth: px(16),
+        minHeight: px(16),
+        minWidth: px(16),
+        width: px(16),
+      }),
+      hamburgerActive: style({
+        $nest: {
+          span: {
+            $nest: {
+              '&:nth-child(1)': {
+                transform: `${translateY(px(5))} ${rotate(deg(45))}`,
+              },
+              '&:nth-child(2)': {
+                opacity: 0,
+              },
+              '&:nth-child(3)': {
+                transform: `${translateY(px(-5))} ${rotate(deg(-45))}`,
+              },
+            },
+          },
+        },
+      }),
+    };
+  }
+
+  get classes(): IBuraMixinClass {
+    return this._classes;
+  }
 
   public arrow = (color: ColorHelper): NestedCSSProperties => ({
     border: `1px solid ${color}`,
@@ -128,33 +178,6 @@ class BaseMixin implements IBuraMixin {
     },
   });
 
-  public deleteSmallClass = (): string => style({
-    height: px(16),
-    maxHeight: px(16),
-    maxWidth: px(16),
-    minHeight: px(16),
-    minWidth: px(16),
-    width: px(16),
-  })
-
-  public deleteMediumClass = (): string => style({
-    height: px(24),
-    maxHeight: px(24),
-    maxWidth: px(24),
-    minHeight: px(24),
-    minWidth: px(24),
-    width: px(24),
-  })
-
-  public deleteLargeClass = (): string => style({
-    height: px(32),
-    maxHeight: px(32),
-    maxWidth: px(32),
-    minHeight: px(32),
-    minWidth: px(32),
-    width: px(32),
-  })
-
   public fa = (
     size: string | number,
     dimensions: string | number,
@@ -207,24 +230,6 @@ class BaseMixin implements IBuraMixin {
     },
   });
 
-  public hamburgerActiveClass = (): string => style({
-    $nest: {
-      span: {
-        $nest: {
-          '&:nth-child(1)': {
-            transform: `${translateY(px(5))} ${rotate(deg(45))}`,
-          },
-          '&:nth-child(2)': {
-            opacity: 0,
-          },
-          '&:nth-child(3)': {
-            transform: `${translateY(px(-5))} ${rotate(deg(-45))}`,
-          },
-        },
-      },
-    }
-  })
-
   public loader = (): NestedCSSProperties => ({
     animation: `${this.theme.animations.spinAround} 500ms infinite linear`,
     border: `${px(2)} solid ${this.theme.derivedVars.border}`,
@@ -252,11 +257,11 @@ class BaseMixin implements IBuraMixin {
 
   public placeholder = (content: NestedCSSProperties): NestedCSSProperties => ({
     $nest: {
-      '&:-moz-placeholder': {...content, $unique: true},
-      '&:-ms-input-placeholder': {...content, $unique: true},
-      '&::-moz-placeholder': {...content, $unique: true},
-      '&::-webkit-input-placeholder': {...content, $unique: true},
-    }
+      '&:-moz-placeholder': { ...content, $unique: true },
+      '&:-ms-input-placeholder': { ...content, $unique: true },
+      '&::-moz-placeholder': { ...content, $unique: true },
+      '&::-webkit-input-placeholder': { ...content, $unique: true },
+    },
   });
 
   public unselectable = (): NestedCSSProperties => ({
@@ -338,5 +343,3 @@ class BaseMixin implements IBuraMixin {
   public fullhd = (css: NestedCSSProperties): NestedCSSProperties =>
     media({ type: 'all', minWidth: this.theme.vars.fullhd }, css);
 }
-
-export default BaseMixin;

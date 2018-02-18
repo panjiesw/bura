@@ -13,11 +13,7 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-import * as utils from './utils';
 
-export { utils };
-export * from './types';
-export { vars } from './base/vars';
-export { derivedVars } from './base/derived';
-export { BuraBaseMixin } from './base/mixins';
-export { BuraBaseTheme } from './base/theme';
+import './minireset';
+// tslint:disable-next-line:ordered-imports
+import './generic';

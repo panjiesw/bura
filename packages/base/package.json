@@ -23,6 +23,7 @@
     "test": "run-s t:*"
   },
   "devDependencies": {
+    "@bura/theme": "0.0.0",
     "@types/node": "8.9.1",
     "@types/react": "^16.0.38",
     "@types/react-dom": "^16.0.4",
@@ -34,8 +35,10 @@
     "typescript": "^2.7.1"
   },
   "dependencies": {
-    "@bura/theme": "0.0.0",
     "csx": "^8.5.0",
     "typestyle": "^1.7.1"
+  },
+  "peerDependencies": {
+    "@bura/theme": "0.0.0"
   }
 }

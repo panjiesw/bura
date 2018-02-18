@@ -5,6 +5,11 @@
   "module": "es/index",
   "main": "lib/index",
   "typings": "lib/index.d.ts",
+  "files": [
+    "es",
+    "lib",
+    "umd"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/panjiesw/bura.git"
@@ -21,6 +26,10 @@
   },
   "homepage": "https://github.com/panjiesw/bura#readme",
   "scripts": {
+    "b:es": "tsc -d --declarationDir lib",
+    "b:lib": "tsc -m commonjs --outDir lib",
+    "build": "run-s del b:*",
+    "del": "del-cli es lib umd",
     "test": "run-s t:*"
   },
   "devDependencies": {
@@ -32,6 +41,7 @@
     "typescript": "^2.7.1"
   },
   "dependencies": {
+    "tslib": "^1.9.0",
     "typestyle": "^1.7.1"
   }
 }

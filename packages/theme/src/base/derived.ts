@@ -29,7 +29,7 @@ import {
 } from '../types';
 import {findColorInvert} from '../utils';
 
-export default function derivedVars(theme: IBuraTheme): IBuraDerivedVariable {
+export function derivedVars(theme: IBuraTheme): IBuraDerivedVariable {
   const colors: IBuraDerivedColor = {
     danger: theme.vars.red,
     dark: theme.vars.greyDarker,
