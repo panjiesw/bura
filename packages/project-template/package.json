@@ -1,25 +1,25 @@
 {
   "private": true,
-  "name": "@rebul/project-template",
+  "name": "@bura/project-template",
   "version": "0.0.0",
-  "description": "Empty project template for internal use in @rebul development",
+  "description": "Empty project template for internal use in @bura development",
   "module": "es/index",
   "main": "lib/index",
   "typings": "lib/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/panjiesw/rebul.git"
+    "url": "git+https://github.com/panjiesw/bura.git"
   },
   "keywords": [
-    "rebul",
+    "bura",
     "typestyle"
   ],
   "author": "Panjie Setiawan Wicaksono",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/panjiesw/rebul/issues"
+    "url": "https://github.com/panjiesw/bura/issues"
   },
-  "homepage": "https://github.com/panjiesw/rebul#readme",
+  "homepage": "https://github.com/panjiesw/bura#readme",
   "scripts": {
     "test": "run-s t:*"
   }

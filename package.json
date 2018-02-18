@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "rebul",
+  "name": "bura",
   "version": "0.0.0",
   "description": "Set of React Components using Bulma and TypeStyle",
   "workspaces": [
@@ -8,7 +8,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/panjiesw/rebul.git"
+    "url": "git+https://github.com/panjiesw/bura.git"
   },
   "keywords": [
     "react",
@@ -19,9 +19,9 @@
   "author": "Panjie Setiawan Wicaksono <panjie@panjiesw.com>",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/panjiesw/rebul/issues"
+    "url": "https://github.com/panjiesw/bura/issues"
   },
-  "homepage": "https://github.com/panjiesw/rebul#readme",
+  "homepage": "https://github.com/panjiesw/bura#readme",
   "scripts": {
     "test": "run-p t:*"
   },

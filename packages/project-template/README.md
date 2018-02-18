@@ -1,1 +1,1 @@
-# Theme module for @rebul components
+# Theme module for @bura components

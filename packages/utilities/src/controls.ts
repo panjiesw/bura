@@ -14,10 +14,10 @@
  *    limitations under the License.
  */
 
-import { NestedCSSProperties } from 'typestyle/lib/types';
 import { calc, em, px } from 'csx';
-import { misc } from './variables';
+import { NestedCSSProperties } from 'typestyle/lib/types';
 import { derivedTypo } from './derived';
+import { misc } from './variables';
 
 // $control-radius: $radius !default
 // $control-radius-small: $radius-small !default
@@ -32,10 +32,10 @@ const controlPaddingVertical = calc(`${em(0.375)} - ${px(1)}`);
 const controlPaddingHorizontal = calc(`${em(0.625)} - ${px(1)}`);
 
 export const variables = {
+  controlPaddingHorizontal,
+  controlPaddingVertical,
   controlRadius,
   controlRadiusSmall,
-  controlPaddingVertical,
-  controlPaddingHorizontal,
 };
 
 export const control = (

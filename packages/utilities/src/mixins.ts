@@ -14,25 +14,25 @@
  *    limitations under the License.
  */
 
-import { NestedCSSProperties } from 'typestyle/lib/types';
 import {
   black,
   calc,
+  ColorHelper,
   deg,
   em,
   percent,
   px,
-  translateX,
-  translateY,
   rem,
   rotate,
-  ColorHelper,
+  translateX,
+  translateY,
 } from 'csx';
 import { media } from 'typestyle';
+import { NestedCSSProperties } from 'typestyle/lib/types';
+import { spinAround } from './animations';
+import { generalColors } from './derived';
 import { ICustomCSSProperties } from './types';
 import { colors, misc, responsive } from './variables';
-import { generalColors } from './derived';
-import { spinAround } from './animations';
 
 export const arrow = (color: ColorHelper): NestedCSSProperties => ({
   border: `1px solid ${color}`,

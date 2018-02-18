@@ -15,34 +15,25 @@
  */
 
 import { ColorHelper } from 'csx';
-import { colors, typography } from './variables';
 import { findColorInvert } from './functions';
+import { colors, typography } from './variables';
 
-// $primary: $turquoise !default
 const primary: ColorHelper = colors.turquoise;
-
-// $info: $cyan !default
 const info: ColorHelper = colors.cyan;
-// $success: $green !default
 const success: ColorHelper = colors.green;
-// $warning: $yellow !default
 const warning: ColorHelper = colors.yellow;
-// $danger: $red !default
 const danger: ColorHelper = colors.red;
-
-// $light: $white-ter !default
 const light: ColorHelper = colors.whiteTer;
-// $dark: $grey-darker !default
 const dark: ColorHelper = colors.greyDarker;
 
 export const derivedColors = {
-  primary,
+  danger,
+  dark,
   info,
+  light,
+  primary,
   success,
   warning,
-  danger,
-  light,
-  dark,
 };
 
 // Invert colors
@@ -63,7 +54,6 @@ const blueInvert: ColorHelper = colors.blue;
 const purpleInvert: ColorHelper = colors.purple;
 // $red-invert: findColorInvert($red) !default
 const redInvert: ColorHelper = colors.red;
-
 // $primary-invert: $turquoise-invert !default
 const primaryInvert: ColorHelper = turquoiseInvert;
 // $info-invert: $cyan-invert !default
@@ -133,14 +123,9 @@ export const textColors = {
 
 // Code colors
 
-// $code: $red !default
 const code: ColorHelper = colors.red;
-// $code-background: $background !default
 const codeBackground: ColorHelper = background;
-
-// $pre: $text !default
 const pre: ColorHelper = text;
-// $pre-background: $background !default
 const preBackground: ColorHelper = background;
 
 export const codeColors = {
@@ -152,26 +137,14 @@ export const codeColors = {
 
 // Link colors
 
-// $link: $blue !default
 const link: ColorHelper = colors.blue;
-// $link-invert: $blue-invert !default
 const linkInvert: ColorHelper = blueInvert;
-// $link-visited: $purple !default
 const linkVisited: ColorHelper = colors.purple;
-
-// $link-hover: $grey-darker !default
 const linkHover: ColorHelper = colors.greyDarker;
-// $link-hover-border: $grey-light !default
 const linkHoverBorder: ColorHelper = colors.greyLight;
-
-// $link-focus: $grey-darker !default
 const linkFocus: ColorHelper = colors.greyDarker;
-// $link-focus-border: $blue !default
 const linkFocusBorder: ColorHelper = colors.blue;
-
-// $link-active: $grey-darker !default
 const linkActive: ColorHelper = colors.greyDarker;
-// $link-active-border: $grey-dark !default
 const linkActiveBorder: ColorHelper = colors.greyDark;
 
 export const linkColors = {
@@ -188,18 +161,11 @@ export const linkColors = {
 
 // Typography
 
-// $family-primary: $family-sans-serif !default
 const familyPrimary = typography.familySansSerif;
-// $family-code: $family-monospace !default
 const familyCode = typography.familyMonospace;
-
-// $size-small: $size-7 !default
 const sizeSmall = typography.size7;
-// $size-normal: $size-6 !default
 const sizeNormal = typography.size6;
-// $size-medium: $size-5 !default
 const sizeMedium = typography.size5;
-// $size-large: $size-4 !default
 const sizeLarge = typography.size4;
 
 export const derivedTypo = {

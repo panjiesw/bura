@@ -14,8 +14,8 @@
  *    limitations under the License.
  */
 
-import { keyframes } from 'typestyle';
 import { deg, rotate } from 'csx';
+import { keyframes } from 'typestyle';
 
 export const spinAround: string = keyframes({
   from: {

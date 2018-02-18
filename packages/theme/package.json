@@ -1,43 +1,35 @@
 {
-  "name": "@rebul/theme",
+  "name": "@bura/theme",
   "version": "0.0.0",
-  "description": "Theme module for @rebul components",
+  "description": "Theme module for @bura components",
   "module": "es/index",
   "main": "lib/index",
   "typings": "lib/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/panjiesw/rebul.git"
+    "url": "git+https://github.com/panjiesw/bura.git"
   },
   "keywords": [
-    "rebul",
+    "bura",
     "theme",
     "typestyle"
   ],
   "author": "Panjie Setiawan Wicaksono",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/panjiesw/rebul/issues"
+    "url": "https://github.com/panjiesw/bura/issues"
   },
-  "homepage": "https://github.com/panjiesw/rebul#readme",
+  "homepage": "https://github.com/panjiesw/bura#readme",
   "scripts": {
     "test": "run-s t:*"
   },
   "devDependencies": {
     "@types/node": "8.9.1",
-    "@types/react": "^16.0.38",
-    "@types/react-dom": "^16.0.4",
     "del-cli": "^1.1.0",
     "npm-run-all": "^4.1.2",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
     "tslint": "^5.9.1",
     "tslint-config-prettier": "^1.8.0",
-    "tslint-react": "^3.5.1",
     "typescript": "^2.7.1"
-  },
-  "peerDependencies": {
-    "react": "^16.2.0"
   },
   "dependencies": {
     "typestyle": "^1.7.1"

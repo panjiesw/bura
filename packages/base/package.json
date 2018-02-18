@@ -1,24 +1,24 @@
 {
-  "name": "@rebul/base",
+  "name": "@bura/base",
   "version": "0.0.0",
-  "description": "Base module for @rebul components",
+  "description": "Base module for @bura components",
   "main": "lib/index",
   "typings": "lib/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/panjiesw/rebul.git"
+    "url": "git+https://github.com/panjiesw/bura.git"
   },
   "keywords": [
-    "rebul",
+    "bura",
     "base",
     "typestyle"
   ],
   "author": "Panjie Setiawan Wicaksono",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/panjiesw/rebul/issues"
+    "url": "https://github.com/panjiesw/bura/issues"
   },
-  "homepage": "https://github.com/panjiesw/rebul#readme",
+  "homepage": "https://github.com/panjiesw/bura#readme",
   "scripts": {
     "test": "run-s t:*"
   },
@@ -34,7 +34,8 @@
     "typescript": "^2.7.1"
   },
   "dependencies": {
-    "@rebul/utilities": "0.0.0",
+    "@bura/theme": "0.0.0",
+    "csx": "^8.5.0",
     "typestyle": "^1.7.1"
   }
 }
