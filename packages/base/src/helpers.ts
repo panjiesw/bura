@@ -40,7 +40,7 @@ declare module '@bura/theme/lib/base/theme' {
 BuraBaseTheme.prototype.withHelpers = function(): BuraBaseTheme {
   this.helpers = {
     ...stylesheet<TBuraHelperStylesheet>({
-      clearFix: { ...this.mixins.clearfix() },
+      clearfix: { ...this.mixins.clearfix() },
       clipped: { overflow: important('hidden') },
       overlay: { ...this.mixins.overlay() },
       pulledLeft: { float: important('left') },
@@ -49,27 +49,27 @@ BuraBaseTheme.prototype.withHelpers = function(): BuraBaseTheme {
     }),
     ...makeSize<Record<keyof IBuraHelperStylesheetSizeMobile, string>>(
       this,
-      'mobile',
+      'Mobile',
     ),
     ...makeSize<Record<keyof IBuraHelperStylesheetSizeTablet, string>>(
       this,
-      'tablet',
+      'Tablet',
     ),
     ...makeSize<Record<keyof IBuraHelperStylesheetSizeTouch, string>>(
       this,
-      'touch',
+      'Touch',
     ),
     ...makeSize<Record<keyof IBuraHelperStylesheetSizeDesktop, string>>(
       this,
-      'desktop',
+      'Desktop',
     ),
     ...makeSize<Record<keyof IBuraHelperStylesheetSizeWidescreen, string>>(
       this,
-      'widescreen',
+      'Widescreen',
     ),
     ...makeSize<Record<keyof IBuraHelperStylesheetSizeFullHD, string>>(
       this,
-      'fullhd',
+      'FullHd',
     ),
   };
   return this;
@@ -79,39 +79,43 @@ export const makeSize = <T>(
   theme: IBuraTheme,
   target:
     | ''
-    | 'mobile'
-    | 'tablet'
-    | 'touch'
-    | 'desktop'
-    | 'widescreen'
-    | 'fullhd' = '',
+    | 'Mobile'
+    | 'Tablet'
+    | 'Touch'
+    | 'Desktop'
+    | 'Widescreen'
+    | 'FullHd' = '',
 ) =>
   theme.derivedVars.sizes.reduce<T>(
     (acc, curr, i) => {
       const rule = { fontSize: important(`${curr}`) };
       acc[`size${i}${target}`] =
-        target === '' ? rule : style(theme.mixins[target](rule));
+        target === '' ? rule : style(theme.mixins[target.toLowerCase()](rule));
       return acc;
     },
     {} as any,
   );
 
-export const alignments: Array<
-  | 'start'
-  | 'end'
-  | 'left'
-  | 'right'
-  | 'center'
-  | 'justify'
-  | 'justify-all'
-  | 'match-parent'
-> = [
-  'start',
-  'end',
-  'left',
-  'right',
-  'center',
-  'justify',
-  'justify-all',
-  'match-parent',
-];
+interface IAlignment {
+  Start: 'start';
+  End: 'end';
+  Left: 'left';
+  Right: 'right';
+  Center: 'center';
+  Justify: 'justify';
+  JustifyAll: 'justify-all';
+  MatchParent: 'match-parent';
+}
+
+export const alignments: IAlignment = {
+  Center: 'center',
+  End: 'end',
+  Justify: 'justify',
+  JustifyAll: 'justify-all',
+  Left: 'left',
+  MatchParent: 'match-parent',
+  Right: 'right',
+  Start: 'start',
+};
+
+

@@ -56,74 +56,70 @@ export interface IBuraHelperStylesheetSize {
 }
 
 export interface IBuraHelperStylesheetSizeMobile {
-  size0mobile: NestedCSSProperties;
-  size1mobile: NestedCSSProperties;
-  size2mobile: NestedCSSProperties;
-  size3mobile: NestedCSSProperties;
-  size4mobile: NestedCSSProperties;
-  size5mobile: NestedCSSProperties;
-  size6mobile: NestedCSSProperties;
+  size0Mobile: NestedCSSProperties;
+  size1Mobile: NestedCSSProperties;
+  size2Mobile: NestedCSSProperties;
+  size3Mobile: NestedCSSProperties;
+  size4Mobile: NestedCSSProperties;
+  size5Mobile: NestedCSSProperties;
+  size6Mobile: NestedCSSProperties;
 }
 
 export interface IBuraHelperStylesheetSizeTablet {
-  size0tablet: NestedCSSProperties;
-  size1tablet: NestedCSSProperties;
-  size2tablet: NestedCSSProperties;
-  size3tablet: NestedCSSProperties;
-  size4tablet: NestedCSSProperties;
-  size5tablet: NestedCSSProperties;
-  size6tablet: NestedCSSProperties;
+  size0Tablet: NestedCSSProperties;
+  size1Tablet: NestedCSSProperties;
+  size2Tablet: NestedCSSProperties;
+  size3Tablet: NestedCSSProperties;
+  size4Tablet: NestedCSSProperties;
+  size5Tablet: NestedCSSProperties;
+  size6Tablet: NestedCSSProperties;
 }
 
 export interface IBuraHelperStylesheetSizeTouch {
-  size0touch: NestedCSSProperties;
-  size1touch: NestedCSSProperties;
-  size2touch: NestedCSSProperties;
-  size3touch: NestedCSSProperties;
-  size4touch: NestedCSSProperties;
-  size5touch: NestedCSSProperties;
-  size6touch: NestedCSSProperties;
+  size0Touch: NestedCSSProperties;
+  size1Touch: NestedCSSProperties;
+  size2Touch: NestedCSSProperties;
+  size3Touch: NestedCSSProperties;
+  size4Touch: NestedCSSProperties;
+  size5Touch: NestedCSSProperties;
+  size6Touch: NestedCSSProperties;
 }
 
 export interface IBuraHelperStylesheetSizeDesktop {
-  size0desktop: NestedCSSProperties;
-  size1desktop: NestedCSSProperties;
-  size2desktop: NestedCSSProperties;
-  size3desktop: NestedCSSProperties;
-  size4desktop: NestedCSSProperties;
-  size5desktop: NestedCSSProperties;
-  size6desktop: NestedCSSProperties;
+  size0Desktop: NestedCSSProperties;
+  size1Desktop: NestedCSSProperties;
+  size2Desktop: NestedCSSProperties;
+  size3Desktop: NestedCSSProperties;
+  size4Desktop: NestedCSSProperties;
+  size5Desktop: NestedCSSProperties;
+  size6Desktop: NestedCSSProperties;
 }
 
 export interface IBuraHelperStylesheetSizeWidescreen {
-  size0widescreen: NestedCSSProperties;
-  size1widescreen: NestedCSSProperties;
-  size2widescreen: NestedCSSProperties;
-  size3widescreen: NestedCSSProperties;
-  size4widescreen: NestedCSSProperties;
-  size5widescreen: NestedCSSProperties;
-  size6widescreen: NestedCSSProperties;
+  size0Widescreen: NestedCSSProperties;
+  size1Widescreen: NestedCSSProperties;
+  size2Widescreen: NestedCSSProperties;
+  size3Widescreen: NestedCSSProperties;
+  size4Widescreen: NestedCSSProperties;
+  size5Widescreen: NestedCSSProperties;
+  size6Widescreen: NestedCSSProperties;
 }
 
 export interface IBuraHelperStylesheetSizeFullHD {
-  size0fullhd: NestedCSSProperties;
-  size1fullhd: NestedCSSProperties;
-  size2fullhd: NestedCSSProperties;
-  size3fullhd: NestedCSSProperties;
-  size4fullhd: NestedCSSProperties;
-  size5fullhd: NestedCSSProperties;
-  size6fullhd: NestedCSSProperties;
+  size0FullHd: NestedCSSProperties;
+  size1FullHd: NestedCSSProperties;
+  size2FullHd: NestedCSSProperties;
+  size3FullHd: NestedCSSProperties;
+  size4FullHd: NestedCSSProperties;
+  size5FullHd: NestedCSSProperties;
+  size6FullHd: NestedCSSProperties;
 }
 
+export interface IBuraHelperTextAlignment {}
+
 export interface IBuraHelperStylesheet
-  extends IBuraHelperStylesheetSize /* ,
-    IBuraHelperStylesheetSizeMobile,
-    IBuraHelperStylesheetSizeTablet,
-    IBuraHelperStylesheetSizeTouch,
-    IBuraHelperStylesheetSizeDesktop,
-    IBuraHelperStylesheetSizeWidescreen,
-    IBuraHelperStylesheetSizeFullHD */ {
-  clearFix: NestedCSSProperties;
+  extends IBuraHelperStylesheetSize {
+  clearfix: NestedCSSProperties;
   pulledLeft: NestedCSSProperties;
   pulledRight: NestedCSSProperties;
   clipped: NestedCSSProperties;
