@@ -14,56 +14,43 @@
  *    limitations under the License.
  */
 
-import { BuraBaseTheme } from '@bura/theme';
 import { em, percent, px, rem } from 'csx';
 import { cssRule } from 'typestyle';
-import * as typestyleTypes from 'typestyle/lib/types';
-import { IBuraGenericVariable } from './types';
+import * as types from '../types';
 
-declare module '@bura/theme/lib/base/theme' {
-  // tslint:disable-next-line:interface-name
-  interface BuraBaseTheme {
-    genericVars: IBuraGenericVariable;
-    withGeneric(): BuraBaseTheme;
-  }
-}
-
-declare module 'typestyle/lib/types' {
-  // tslint:disable-next-line:interface-name
-  interface CSSProperties {
-    textSizeAdjust?: number | string;
-  }
-}
-
-BuraBaseTheme.prototype.withGeneric = function(): BuraBaseTheme {
-  this.genericVars = {
-    bodyBackgroundColor: this.vars.white,
-    bodyColor: this.derivedVars.text,
-    bodyFamily: this.derivedVars.familyPrimary,
+export function createGenericVars(
+  theme: types.IBuraTheme,
+): types.IBuraGenericVariable {
+  return {
+    bodyBackgroundColor: theme.vars.white,
+    bodyColor: theme.derivedVars.text,
+    bodyFamily: theme.derivedVars.familyPrimary,
     bodyLineHeight: 1.5,
     bodyRendering: 'optimizeLegibility',
     bodySize: px(16),
-    bodyWeight: this.vars.weightNormal,
-    codeFamily: this.derivedVars.familyCode,
+    bodyWeight: theme.vars.weightNormal,
+    codeFamily: theme.derivedVars.familyCode,
     codePadding: `${em(0.25)} ${em(0.5)} ${em(0.25)}`,
     codeSize: em(0.875),
     codeWeight: 'normal',
-    hrBackgroundColor: this.derivedVars.border,
+    hrBackgroundColor: theme.derivedVars.border,
     hrHeight: px(1),
     hrMargin: `${rem(1.5)} 0`,
-    strongColor: this.derivedVars.textStrong,
-    strongWeight: this.vars.weightBold,
-  };
+    strongColor: theme.derivedVars.textStrong,
+    strongWeight: theme.vars.weightBold,
+  }
+}
 
+export function writeGenericRule(theme: types.IBuraTheme) {
   cssRule('html', {
     '-moz-osx-font-smoothing': 'grayscale',
     '-webkit-font-smoothing': 'antialiased',
-    backgroundColor: `${this.genericVars.bodyBackgroundColor}`,
-    fontSize: this.genericVars.bodySize,
+    backgroundColor: `${theme.genericVars.bodyBackgroundColor}`,
+    fontSize: theme.genericVars.bodySize,
     minWidth: px(300),
     overflowX: 'hidden',
     overflowY: 'scroll',
-    textRendering: this.genericVars.bodyRendering,
+    textRendering: theme.genericVars.bodyRendering,
     textSizeAdjust: percent(100),
   });
 
@@ -72,30 +59,30 @@ BuraBaseTheme.prototype.withGeneric = function(): BuraBaseTheme {
   });
 
   cssRule('body, button, input, select, textarea', {
-    fontFamily: this.genericVars.bodyFamily,
+    fontFamily: theme.genericVars.bodyFamily,
   });
 
   cssRule('code, pre', {
     '-moz-osx-font-smoothing': 'auto',
     '-webkit-font-smoothing': 'auto',
-    fontFamily: this.genericVars.codeFamily,
+    fontFamily: theme.genericVars.codeFamily,
   });
 
   cssRule('body', {
-    color: `${this.genericVars.bodyColor}`,
+    color: `${theme.genericVars.bodyColor}`,
     fontSize: rem(1),
-    fontWeight: this.genericVars.bodyWeight,
-    lineHeight: this.genericVars.bodyLineHeight,
+    fontWeight: theme.genericVars.bodyWeight,
+    lineHeight: theme.genericVars.bodyLineHeight,
   });
 
   cssRule('a', {
-    color: `${this.derivedVars.link}`,
+    color: `${theme.derivedVars.link}`,
     cursor: 'pointer',
     textDecoration: 'none',
     // tslint:disable-next-line:object-literal-sort-keys
     $nest: {
       '&:hover': {
-        color: `${this.derivedVars.linkHover}`,
+        color: `${theme.derivedVars.linkHover}`,
       },
       strong: {
         color: 'currentColor',
@@ -104,19 +91,19 @@ BuraBaseTheme.prototype.withGeneric = function(): BuraBaseTheme {
   });
 
   cssRule('code', {
-    backgroundColor: `${this.derivedVars.codeBackground}`,
-    color: `${this.derivedVars.code}`,
-    fontSize: this.genericVars.codeSize,
-    fontWeight: this.genericVars.codeWeight,
-    padding: this.genericVars.codePadding,
+    backgroundColor: `${theme.derivedVars.codeBackground}`,
+    color: `${theme.derivedVars.code}`,
+    fontSize: theme.genericVars.codeSize,
+    fontWeight: theme.genericVars.codeWeight,
+    padding: theme.genericVars.codePadding,
   });
 
   cssRule('hr', {
-    backgroundColor: `${this.genericVars.hrBackgroundColor}`,
+    backgroundColor: `${theme.genericVars.hrBackgroundColor}`,
     border: 'none',
     display: 'block',
-    height: this.genericVars.hrHeight,
-    margin: this.genericVars.hrMargin,
+    height: theme.genericVars.hrHeight,
+    margin: theme.genericVars.hrMargin,
   });
 
   cssRule('img', {
@@ -138,13 +125,13 @@ BuraBaseTheme.prototype.withGeneric = function(): BuraBaseTheme {
   });
 
   cssRule('strong', {
-    color: `${this.genericVars.strongColor}`,
-    fontWeight: this.genericVars.strongWeight,
+    color: `${theme.genericVars.strongColor}`,
+    fontWeight: theme.genericVars.strongWeight,
   });
 
-  cssRule('pre', this.mixins.overflowTouch(), {
-    backgroundColor: `${this.derivedVars.preBackground}`,
-    color: `${this.derivedVars.pre}`,
+  cssRule('pre', theme.mixins.overflowTouch(), {
+    backgroundColor: `${theme.derivedVars.preBackground}`,
+    color: `${theme.derivedVars.pre}`,
     fontSize: em(0.875),
     overflowX: 'auto',
     padding: `${rem(1.25)} ${rem(1.5)}`,
@@ -168,9 +155,8 @@ BuraBaseTheme.prototype.withGeneric = function(): BuraBaseTheme {
         verticalAlign: 'top',
       },
       th: {
-        color: `${this.derivedVars.textStrong}`,
+        color: `${theme.derivedVars.textStrong}`,
       },
     },
   });
-  return this;
 }

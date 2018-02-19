@@ -14,23 +14,13 @@
  *    limitations under the License.
  */
 
-import {
-  IBuraDerivedCodeColor,
-  IBuraDerivedColor,
-  IBuraDerivedColorTuple,
-  IBuraDerivedGeneralColor,
-  IBuraDerivedInvertColor,
-  IBuraDerivedLinkColor,
-  IBuraDerivedShade,
-  IBuraDerivedTextColor,
-  IBuraDerivedTypo,
-  IBuraDerivedVariable,
-  IBuraTheme,
-} from '../types';
-import {findColorInvert} from '../utils';
+import * as types from '../types';
+import { findColorInvert } from '../utils';
 
-export function derivedVars(theme: IBuraTheme): IBuraDerivedVariable {
-  const colors: IBuraDerivedColor = {
+export function createDerivedVars(
+  theme: types.IBuraTheme,
+): types.IBuraDerivedVariable {
+  const colors: types.IBuraDerivedColor = {
     danger: theme.vars.red,
     dark: theme.vars.greyDarker,
     info: theme.vars.cyan,
@@ -47,7 +37,7 @@ export function derivedVars(theme: IBuraTheme): IBuraDerivedVariable {
   const blueInvert = findColorInvert(theme.vars.blue);
   const purpleInvert = findColorInvert(theme.vars.purple);
   const redInvert = findColorInvert(theme.vars.red);
-  const invertColor: IBuraDerivedInvertColor = {
+  const invertColor: types.IBuraDerivedInvertColor = {
     blueInvert,
     cyanInvert,
     dangerInvert: redInvert,
@@ -66,28 +56,28 @@ export function derivedVars(theme: IBuraTheme): IBuraDerivedVariable {
   };
 
   const background = theme.vars.whiteTer;
-  const generalColors: IBuraDerivedGeneralColor = {
+  const generalColors: types.IBuraDerivedGeneralColor = {
     background,
     border: theme.vars.greyLighter,
     borderHover: theme.vars.greyLight,
   };
 
   const text = theme.vars.greyDark;
-  const textColors: IBuraDerivedTextColor = {
+  const textColors: types.IBuraDerivedTextColor = {
     text,
     textInvert: findColorInvert(text),
     textLight: theme.vars.grey,
     textStrong: theme.vars.greyDarker,
   };
 
-  const codeColors: IBuraDerivedCodeColor = {
+  const codeColors: types.IBuraDerivedCodeColor = {
     code: theme.vars.red,
     codeBackground: background,
     pre: text,
     preBackground: background,
   };
 
-  const linkColors: IBuraDerivedLinkColor = {
+  const linkColors: types.IBuraDerivedLinkColor = {
     link: theme.vars.blue,
     linkActive: theme.vars.greyDarker,
     linkActiveBorder: theme.vars.greyDark,
@@ -99,7 +89,7 @@ export function derivedVars(theme: IBuraTheme): IBuraDerivedVariable {
     linkVisited: theme.vars.purple,
   };
 
-  const typo: IBuraDerivedTypo = {
+  const typo: types.IBuraDerivedTypo = {
     familyCode: theme.vars.familyMonospace,
     familyPrimary: theme.vars.familySansSerif,
     sizeLarge: theme.vars.size4,
@@ -108,7 +98,7 @@ export function derivedVars(theme: IBuraTheme): IBuraDerivedVariable {
     sizeSmall: theme.vars.size7,
   };
 
-  const colorTuple: IBuraDerivedColorTuple = {
+  const colorTuple: types.IBuraDerivedColorTuple = {
     blackTuple: [theme.vars.black, theme.vars.white],
     dangerTuple: [colors.danger, invertColor.dangerInvert],
     darkTuple: [colors.dark, invertColor.darkInvert],
@@ -121,7 +111,7 @@ export function derivedVars(theme: IBuraTheme): IBuraDerivedVariable {
     whiteTuple: [theme.vars.white, theme.vars.black],
   };
 
-  const shades: IBuraDerivedShade = {
+  const shades: types.IBuraDerivedShade = {
     blackBisShade: theme.vars.blackBis,
     blackTerShade: theme.vars.blackTer,
     greyDarkShade: theme.vars.greyDark,

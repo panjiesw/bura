@@ -28,13 +28,13 @@ import {
 } from 'csx/lib';
 import { media, style } from 'typestyle';
 import { NestedCSSProperties } from 'typestyle/lib/types';
-import { IBuraMixin, IBuraMixinClass, IBuraTheme } from '../types';
+import * as types from '../types';
 
-export class BuraBaseMixin implements IBuraMixin {
-  private _classes: IBuraMixinClass;
+export class BuraMixin implements types.IBuraMixin {
+  public classes: types.IBuraMixinClass;
 
-  constructor(protected theme: IBuraTheme) {
-    this._classes = {
+  constructor(private theme: types.IBuraTheme) {
+    this.classes = {
       deleteLarge: style({
         height: px(32),
         maxHeight: px(32),
@@ -77,10 +77,6 @@ export class BuraBaseMixin implements IBuraMixin {
         },
       }),
     };
-  }
-
-  get classes(): IBuraMixinClass {
-    return this._classes;
   }
 
   public arrow = (color: ColorHelper): NestedCSSProperties => ({

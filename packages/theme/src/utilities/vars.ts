@@ -14,21 +14,10 @@
  *    limitations under the License.
  */
 
-import {
-  hsl,
-  px,
-  rem,
-} from 'csx';
-import {
-  IBuraColor,
-  IBuraFlag,
-  IBuraMisc,
-  IBuraResponsive,
-  IBuraTypo,
-  IBuraVariable,
-} from '../types';
+import { hsl, px, rem } from 'csx';
+import * as types from '../types';
 
-const colors: IBuraColor = {
+const colors: types.IBuraColor = {
   black: hsl(0, '0%', '4%'),
   blackBis: hsl(0, '0%', '7%'),
   blackTer: hsl(0, '0%', '14%'),
@@ -50,7 +39,7 @@ const colors: IBuraColor = {
   yellow: hsl(48, '100%', '67%'),
 };
 
-const typo: IBuraTypo = {
+const typo: types.IBuraTypo = {
   familyMonospace: {
     fontFamily: 'monospace',
   },
@@ -74,7 +63,7 @@ const typo: IBuraTypo = {
   weightSemibold: 600,
 };
 
-const responsive: IBuraResponsive  = {
+const responsive: types.IBuraResponsive = {
   desktop: px(960 + 2 * 32),
   fullhd: px(1344 + 2 * 32),
   gap: px(32),
@@ -82,7 +71,7 @@ const responsive: IBuraResponsive  = {
   widescreen: px(1152 + 2 * 32),
 };
 
-const misc: IBuraMisc = {
+const misc: types.IBuraMisc = {
   easing: 'ease-out',
   radius: px(3),
   radiusLarge: px(5),
@@ -91,9 +80,9 @@ const misc: IBuraMisc = {
   speed: '86ms',
 };
 
-const flags: IBuraFlag = {variableColumns: true}
+const flags: types.IBuraFlag = { variableColumns: true };
 
-export const vars: IBuraVariable = {
+export const vars: types.IBuraVariable = {
   ...colors,
   ...typo,
   ...responsive,
