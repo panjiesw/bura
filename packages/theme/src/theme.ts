@@ -21,15 +21,15 @@ import { createHelperClasses } from './base/helper';
 import { writeMiniReset } from './base/minireset';
 import * as types from './types';
 import { createDerivedVars } from './utilities/derived';
-import { BuraMixin } from './utilities/mixins';
+import { Mixin } from './utilities/mixins';
 import { vars } from './utilities/vars';
 
-export class BuraTheme implements types.IBuraTheme {
-  public vars: types.IBuraVariable;
-  public derivedVars: types.IBuraDerivedVariable;
-  public animations: types.IBuraAnimation;
-  public mixins: types.IBuraMixin;
-  public genericVars: types.IBuraGenericVariable;
+export class Theme implements types.ITheme {
+  public vars: types.IVariable;
+  public derivedVars: types.IDerivedVariable;
+  public animations: types.IAnimation;
+  public mixins: types.IMixin;
+  public genericVars: types.IGenericVariable;
   public helpers: types.BuraHelperClasses;
 
   constructor() {
@@ -45,22 +45,22 @@ export class BuraTheme implements types.IBuraTheme {
         },
       }),
     };
-    this.mixins = new BuraMixin(this);
+    this.mixins = new Mixin(this);
     this.genericVars = createGenericVars(this);
     this.helpers = createHelperClasses(this);
   }
 
-  public withMiniReset(): types.IBuraTheme {
+  public withMiniReset(): types.ITheme {
     writeMiniReset();
     return this;
   }
 
-  public withGeneric(): types.IBuraTheme {
+  public withGeneric(): types.ITheme {
     writeGenericRule(this);
     return this;
   }
 
-  public setVars(variables: Partial<types.IBuraVariable>): types.IBuraTheme {
+  public setVars(variables: Partial<types.IVariable>): types.ITheme {
     this.vars = {
       ...this.vars,
       ...variables,
@@ -70,8 +70,8 @@ export class BuraTheme implements types.IBuraTheme {
   }
 
   public setDerivedVars(
-    variables: Partial<types.IBuraDerivedVariable>,
-  ): types.IBuraTheme {
+    variables: Partial<types.IDerivedVariable>,
+  ): types.ITheme {
     this.derivedVars = {
       ...this.derivedVars,
       ...variables,
@@ -80,8 +80,8 @@ export class BuraTheme implements types.IBuraTheme {
   }
 
   public setAnimation(
-    animations: Partial<types.IBuraAnimation>,
-  ): types.IBuraTheme {
+    animations: Partial<types.IAnimation>,
+  ): types.ITheme {
     this.animations = {
       ...this.animations,
       ...animations,
@@ -89,12 +89,12 @@ export class BuraTheme implements types.IBuraTheme {
     return this;
   }
 
-  public setMixins(mixin: types.IBuraMixin): types.IBuraTheme {
+  public setMixins(mixin: types.IMixin): types.ITheme {
     this.mixins = mixin;
     return this;
   }
 
-  public setColor(colors: Partial<types.IBuraColor>): types.IBuraTheme {
+  public setColor(colors: Partial<types.IColor>): types.ITheme {
     this.vars = {
       ...this.vars,
       ...colors,
@@ -103,7 +103,7 @@ export class BuraTheme implements types.IBuraTheme {
     return this;
   }
 
-  public setTypo(typo: Partial<types.IBuraTypo>): types.IBuraTheme {
+  public setTypo(typo: Partial<types.ITypo>): types.ITheme {
     this.vars = {
       ...this.vars,
       ...typo,
@@ -113,8 +113,8 @@ export class BuraTheme implements types.IBuraTheme {
   }
 
   public setResponsive(
-    responsive: Partial<types.IBuraResponsive>,
-  ): types.IBuraTheme {
+    responsive: Partial<types.IResponsive>,
+  ): types.ITheme {
     this.vars = {
       ...this.vars,
       ...responsive,
@@ -123,7 +123,7 @@ export class BuraTheme implements types.IBuraTheme {
     return this;
   }
 
-  public setMisc(misc: Partial<types.IBuraMisc>): types.IBuraTheme {
+  public setMisc(misc: Partial<types.IMisc>): types.ITheme {
     this.vars = {
       ...this.vars,
       ...misc,
@@ -132,7 +132,7 @@ export class BuraTheme implements types.IBuraTheme {
     return this;
   }
 
-  public setFlag(flags: Partial<types.IBuraFlag>): types.IBuraTheme {
+  public setFlag(flags: Partial<types.IFlag>): types.ITheme {
     this.vars = {
       ...this.vars,
       ...flags,
@@ -142,8 +142,8 @@ export class BuraTheme implements types.IBuraTheme {
   }
 
   public setDerivedColor(
-    colors: Partial<types.IBuraDerivedColor>,
-  ): types.IBuraTheme {
+    colors: Partial<types.IDerivedColor>,
+  ): types.ITheme {
     this.derivedVars = {
       ...this.derivedVars,
       ...colors,
@@ -152,8 +152,8 @@ export class BuraTheme implements types.IBuraTheme {
   }
 
   public setDerivedInvertColor(
-    colors: Partial<types.IBuraDerivedInvertColor>,
-  ): types.IBuraTheme {
+    colors: Partial<types.IDerivedInvertColor>,
+  ): types.ITheme {
     this.derivedVars = {
       ...this.derivedVars,
       ...colors,
@@ -162,8 +162,8 @@ export class BuraTheme implements types.IBuraTheme {
   }
 
   public setDerivedGeneralColor(
-    colors: Partial<types.IBuraDerivedGeneralColor>,
-  ): types.IBuraTheme {
+    colors: Partial<types.IDerivedGeneralColor>,
+  ): types.ITheme {
     this.derivedVars = {
       ...this.derivedVars,
       ...colors,
@@ -172,8 +172,8 @@ export class BuraTheme implements types.IBuraTheme {
   }
 
   public setDerivedTextColor(
-    colors: Partial<types.IBuraDerivedTextColor>,
-  ): types.IBuraTheme {
+    colors: Partial<types.IDerivedTextColor>,
+  ): types.ITheme {
     this.derivedVars = {
       ...this.derivedVars,
       ...colors,
@@ -182,8 +182,8 @@ export class BuraTheme implements types.IBuraTheme {
   }
 
   public setDerivedCodeColor(
-    colors: Partial<types.IBuraDerivedCodeColor>,
-  ): types.IBuraTheme {
+    colors: Partial<types.IDerivedCodeColor>,
+  ): types.ITheme {
     this.derivedVars = {
       ...this.derivedVars,
       ...colors,
@@ -192,8 +192,8 @@ export class BuraTheme implements types.IBuraTheme {
   }
 
   public setDerivedLinkColor(
-    colors: Partial<types.IBuraDerivedLinkColor>,
-  ): types.IBuraTheme {
+    colors: Partial<types.IDerivedLinkColor>,
+  ): types.ITheme {
     this.derivedVars = {
       ...this.derivedVars,
       ...colors,
@@ -202,8 +202,8 @@ export class BuraTheme implements types.IBuraTheme {
   }
 
   public setDerivedTypo(
-    typo: Partial<types.IBuraDerivedTypo>,
-  ): types.IBuraTheme {
+    typo: Partial<types.IDerivedTypo>,
+  ): types.ITheme {
     this.derivedVars = {
       ...this.derivedVars,
       ...typo,

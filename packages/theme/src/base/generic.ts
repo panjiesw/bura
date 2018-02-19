@@ -16,11 +16,11 @@
 
 import { em, percent, px, rem } from 'csx';
 import { cssRule } from 'typestyle';
-import * as types from '../types';
+import * as t from '../types';
 
 export function createGenericVars(
-  theme: types.IBuraTheme,
-): types.IBuraGenericVariable {
+  theme: t.ITheme,
+): t.IGenericVariable {
   return {
     bodyBackgroundColor: theme.vars.white,
     bodyColor: theme.derivedVars.text,
@@ -41,7 +41,7 @@ export function createGenericVars(
   }
 }
 
-export function writeGenericRule(theme: types.IBuraTheme) {
+export function writeGenericRule(theme: t.ITheme) {
   cssRule('html', {
     '-moz-osx-font-smoothing': 'grayscale',
     '-webkit-font-smoothing': 'antialiased',

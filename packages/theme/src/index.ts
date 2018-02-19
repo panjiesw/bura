@@ -22,5 +22,5 @@ export { createGenericVars, writeGenericRule } from './base/generic';
 export { createHelperClasses } from './base/helper';
 export { writeMiniReset } from './base/minireset';
 export { createDerivedVars } from './utilities/derived';
-export { BuraMixin } from './utilities/mixins';
-export { BuraTheme } from './theme';
+export { Mixin } from './utilities/mixins';
+export { Theme } from './theme';

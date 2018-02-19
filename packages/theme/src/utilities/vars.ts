@@ -15,9 +15,9 @@
  */
 
 import { hsl, px, rem } from 'csx';
-import * as types from '../types';
+import * as t from '../types';
 
-const colors: types.IBuraColor = {
+const colors: t.IColor = {
   black: hsl(0, '0%', '4%'),
   blackBis: hsl(0, '0%', '7%'),
   blackTer: hsl(0, '0%', '14%'),
@@ -39,7 +39,7 @@ const colors: types.IBuraColor = {
   yellow: hsl(48, '100%', '67%'),
 };
 
-const typo: types.IBuraTypo = {
+const typo: t.ITypo = {
   familyMonospace: {
     fontFamily: 'monospace',
   },
@@ -63,7 +63,7 @@ const typo: types.IBuraTypo = {
   weightSemibold: 600,
 };
 
-const responsive: types.IBuraResponsive = {
+const responsive: t.IResponsive = {
   desktop: px(960 + 2 * 32),
   fullhd: px(1344 + 2 * 32),
   gap: px(32),
@@ -71,7 +71,7 @@ const responsive: types.IBuraResponsive = {
   widescreen: px(1152 + 2 * 32),
 };
 
-const misc: types.IBuraMisc = {
+const misc: t.IMisc = {
   easing: 'ease-out',
   radius: px(3),
   radiusLarge: px(5),
@@ -80,9 +80,9 @@ const misc: types.IBuraMisc = {
   speed: '86ms',
 };
 
-const flags: types.IBuraFlag = { variableColumns: true };
+const flags: t.IFlag = { variableColumns: true };
 
-export const vars: types.IBuraVariable = {
+export const vars: t.IVariable = {
   ...colors,
   ...typo,
   ...responsive,

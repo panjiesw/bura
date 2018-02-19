@@ -14,79 +14,146 @@
  *    limitations under the License.
  */
 
-import { important } from 'csx';
+import { ColorHelper, important } from 'csx';
 import { style, stylesheet } from 'typestyle';
-import * as types from '../types';
+import * as t from '../types';
 
-const makeSize = <T>(
-  theme: types.IBuraTheme,
-  target:
-    | ''
-    | 'Mobile'
-    | 'Tablet'
-    | 'Touch'
-    | 'Desktop'
-    | 'Widescreen'
-    | 'FullHd' = '',
-) =>
+interface IAlignment {
+  Left: 'left';
+  Right: 'right';
+  Centered: 'center';
+  Justified: 'justify';
+}
+
+type Responsive =
+  | 'Mobile'
+  | 'Tablet'
+  | 'Touch'
+  | 'Desktop'
+  | 'Widescreen'
+  | 'FullHd';
+
+const makeSize = <T>(theme: t.ITheme, target: '' | Responsive = '') =>
   theme.derivedVars.sizes.reduce<T>(
     (acc, curr, i) => {
       const rule = { fontSize: important(`${curr}`) };
-      acc[`size${i}${target}`] =
-        target === '' ? rule : style(theme.mixins[target.toLowerCase()](rule));
+      const cls = `size${i}${target}`;
+      acc[cls] =
+        target === ''
+          ? rule
+          : style(theme.mixins[target.toLowerCase()](rule), {
+              $debugName: cls,
+            });
       return acc;
     },
     {} as any,
   );
 
-// interface IAlignment {
-//   Left: 'left';
-//   Right: 'right';
-//   Centered: 'center';
-//   Justified: 'justify';
-// }
+const alignments: IAlignment = {
+  Centered: 'center',
+  Justified: 'justify',
+  Left: 'left',
+  Right: 'right',
+};
 
-// const alignments: IAlignment = {
-//   Centered: 'center',
-//   Justified: 'justify',
-//   Left: 'left',
-//   Right: 'right',
-// };
+const makeTextAlignments = (theme: t.ITheme) =>
+  [
+    '',
+    'Mobile',
+    'Tablet',
+    'TabletOnly',
+    'Touch',
+    'Desktop',
+    'DesktopOnly',
+    'Widescreen',
+    'WidescreenOnly',
+    'FullHd',
+  ].reduce<t.IHelperTextAlignmentClasses>(
+    (acc, curr) => {
+      for (const index in alignments) {
+        if (alignments.hasOwnProperty(index)) {
+          const textAlign = important(alignments[index]);
+          const cls = `text${alignments[index]}${curr}`;
+          const method = `${curr.charAt(0).toLowerCase()}${curr.slice(1)}`;
+          acc[cls] = style(theme.mixins[method]({ textAlign }), {
+            $debugName: cls,
+          });
+        }
+      }
+      return acc;
+    },
+    {} as any,
+  );
 
-export function createHelperClasses(
-  theme: types.IBuraTheme,
-): types.BuraHelperClasses {
+const makeTextColors = (theme: t.ITheme): t.IHelperTextColor =>
+  Object.keys(theme.derivedVars.colors).reduce(
+    (acc, curr) => {
+      const color: ColorHelper = theme.derivedVars.colors[curr];
+      acc[`text${curr.charAt(0).toUpperCase()}${curr.slice(1)}`] = style({
+        $nest: {
+          'a&': {
+            $nest: {
+              '&:hover, &:focus': {
+                color: important(`${color.darken('10%')}`),
+              },
+            },
+          },
+        },
+        color: important(`${color}`),
+      });
+      return acc;
+    },
+    {} as any,
+  );
+
+const makeTextShades = (theme: t.ITheme): t.IHelperTextShade =>
+  Object.keys(theme.derivedVars.shades).reduce(
+    (acc, curr) => {
+      const color: ColorHelper = theme.derivedVars.shades[curr];
+      acc[`text${curr.charAt(0).toUpperCase()}${curr.slice(1)}`] = style({
+        color: important(`${color}`),
+      });
+    },
+    {} as any,
+  );
+
+export function createHelperClasses(theme: t.ITheme): t.BuraHelperClasses {
   return {
-    ...stylesheet<types.BuraHelperStylesheet>({
+    ...stylesheet<t.BuraHelperSheet>({
+      capitalized: { textTransform: important('capitalize') },
       clearfix: { ...theme.mixins.clearfix() },
       clipped: { overflow: important('hidden') },
+      // italic: {textTransform: important('italic')},
+      lowercase: { textTransform: important('lowercase') },
       overlay: { ...theme.mixins.overlay() },
       pulledLeft: { float: important('left') },
       pulledRight: { float: important('right') },
-      ...makeSize<types.IBuraHelperStylesheetSize>(theme),
+      uppercase: { textTransform: important('uppercase') },
+      ...makeSize<t.IHelperSheetSize>(theme),
     }),
-    ...makeSize<Record<keyof types.IBuraHelperStylesheetSizeMobile, string>>(
+    ...makeSize<Record<keyof t.IHelperSheetSizeMobile, string>>(
       theme,
       'Mobile',
     ),
-    ...makeSize<Record<keyof types.IBuraHelperStylesheetSizeTablet, string>>(
+    ...makeSize<Record<keyof t.IHelperSheetSizeTablet, string>>(
       theme,
       'Tablet',
     ),
-    ...makeSize<Record<keyof types.IBuraHelperStylesheetSizeTouch, string>>(
-      theme,
-      'Touch',
-    ),
-    ...makeSize<Record<keyof types.IBuraHelperStylesheetSizeDesktop, string>>(
+    ...makeSize<Record<keyof t.IHelperSheetSizeTouch, string>>(theme, 'Touch'),
+    ...makeSize<Record<keyof t.IHelperSheetSizeDesktop, string>>(
       theme,
       'Desktop',
     ),
-    ...makeSize<
-      Record<keyof types.IBuraHelperStylesheetSizeWidescreen, string>
-    >(theme, 'Widescreen'),
-    ...makeSize<Record<keyof types.IBuraHelperStylesheetSizeFullHD, string>>(
+    ...makeSize<Record<keyof t.IHelperSheetSizeWidescreen, string>>(
+      theme,
+      'Widescreen',
+    ),
+    ...makeSize<Record<keyof t.IHelperSheetSizeFullHD, string>>(
       theme,
       'FullHd',
     ),
+    ...makeTextAlignments(theme),
+    ...makeTextColors(theme),
+    ...makeTextShades(theme),
   };
 }

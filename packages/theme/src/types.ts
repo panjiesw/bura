@@ -24,7 +24,7 @@ declare module 'typestyle/lib/types' {
   }
 }
 
-export interface IBuraColor {
+export interface IColor {
   black: ColorHelper;
   blackBis: ColorHelper;
   blackTer: ColorHelper;
@@ -46,7 +46,7 @@ export interface IBuraColor {
   red: ColorHelper;
 }
 
-export interface IBuraTypo {
+export interface ITypo {
   familyMonospace: typets.FontFace;
   familySansSerif: typets.FontFace;
   renderMode: string;
@@ -64,7 +64,7 @@ export interface IBuraTypo {
   weightBold: number;
 }
 
-export interface IBuraResponsive {
+export interface IResponsive {
   gap: number | string;
   tablet: number | string;
   desktop: number | string;
@@ -72,7 +72,7 @@ export interface IBuraResponsive {
   fullhd: number | string;
 }
 
-export interface IBuraMisc {
+export interface IMisc {
   easing: string;
   radiusSmall: number | string;
   radius: number | string;
@@ -81,18 +81,18 @@ export interface IBuraMisc {
   speed: string;
 }
 
-export interface IBuraFlag {
+export interface IFlag {
   variableColumns: boolean;
 }
 
-export interface IBuraVariable
-  extends IBuraColor,
-    IBuraTypo,
-    IBuraResponsive,
-    IBuraMisc,
-    IBuraFlag {}
+export interface IVariable
+  extends IColor,
+    ITypo,
+    IResponsive,
+    IMisc,
+    IFlag {}
 
-export interface IBuraDerivedColor {
+export interface IDerivedColor {
   danger: ColorHelper;
   dark: ColorHelper;
   info: ColorHelper;
@@ -102,7 +102,7 @@ export interface IBuraDerivedColor {
   warning: ColorHelper;
 }
 
-export interface IBuraDerivedInvertColor {
+export interface IDerivedInvertColor {
   blueInvert: ColorHelper;
   cyanInvert: ColorHelper;
   dangerInvert: ColorHelper;
@@ -120,27 +120,27 @@ export interface IBuraDerivedInvertColor {
   yellowInvert: ColorHelper;
 }
 
-export interface IBuraDerivedGeneralColor {
+export interface IDerivedGeneralColor {
   background: ColorHelper;
   border: ColorHelper;
   borderHover: ColorHelper;
 }
 
-export interface IBuraDerivedTextColor {
+export interface IDerivedTextColor {
   text: ColorHelper;
   textInvert: ColorHelper;
   textLight: ColorHelper;
   textStrong: ColorHelper;
 }
 
-export interface IBuraDerivedCodeColor {
+export interface IDerivedCodeColor {
   code: ColorHelper;
   codeBackground: ColorHelper;
   pre: ColorHelper;
   preBackground: ColorHelper;
 }
 
-export interface IBuraDerivedLinkColor {
+export interface IDerivedLinkColor {
   link: ColorHelper;
   linkActive: ColorHelper;
   linkActiveBorder: ColorHelper;
@@ -152,7 +152,7 @@ export interface IBuraDerivedLinkColor {
   linkVisited: ColorHelper;
 }
 
-export interface IBuraDerivedTypo {
+export interface IDerivedTypo {
   familyCode: typets.FontFace;
   familyPrimary: typets.FontFace;
   sizeSmall: number | string;
@@ -161,56 +161,56 @@ export interface IBuraDerivedTypo {
   sizeLarge: number | string;
 }
 
-export interface IBuraDerivedColorTuple {
-  blackTuple: [ColorHelper, ColorHelper];
-  dangerTuple: [ColorHelper, ColorHelper];
-  darkTuple: [ColorHelper, ColorHelper];
-  infoTuple: [ColorHelper, ColorHelper];
-  lightTuple: [ColorHelper, ColorHelper];
-  linkTuple: [ColorHelper, ColorHelper];
-  primaryTuple: [ColorHelper, ColorHelper];
-  successTuple: [ColorHelper, ColorHelper];
-  warningTuple: [ColorHelper, ColorHelper];
-  whiteTuple: [ColorHelper, ColorHelper];
+export interface IDerivedColorTuple {
+  black: [ColorHelper, ColorHelper];
+  danger: [ColorHelper, ColorHelper];
+  dark: [ColorHelper, ColorHelper];
+  info: [ColorHelper, ColorHelper];
+  light: [ColorHelper, ColorHelper];
+  link: [ColorHelper, ColorHelper];
+  primary: [ColorHelper, ColorHelper];
+  success: [ColorHelper, ColorHelper];
+  warning: [ColorHelper, ColorHelper];
+  white: [ColorHelper, ColorHelper];
 }
 
-export interface IBuraDerivedShade {
-  blackBisShade: ColorHelper;
-  blackTerShade: ColorHelper;
-  greyShade: ColorHelper;
-  greyDarkShade: ColorHelper;
-  greyDarkerShade: ColorHelper;
-  greyLightShade: ColorHelper;
-  whiteBisShade: ColorHelper;
-  whiteTerShade: ColorHelper;
+export interface IDerivedShade {
+  blackBis: ColorHelper;
+  blackTer: ColorHelper;
+  grey: ColorHelper;
+  greyDark: ColorHelper;
+  greyDarker: ColorHelper;
+  greyLight: ColorHelper;
+  whiteBis: ColorHelper;
+  whiteTer: ColorHelper;
 }
 
-export interface IBuraDerivedVariable
-  extends IBuraDerivedColor,
-    IBuraDerivedInvertColor,
-    IBuraDerivedGeneralColor,
-    IBuraDerivedTextColor,
-    IBuraDerivedCodeColor,
-    IBuraDerivedLinkColor,
-    IBuraDerivedTypo,
-    IBuraDerivedColorTuple,
-    IBuraDerivedShade {
+export interface IDerivedVariable
+  extends IDerivedColor,
+    IDerivedInvertColor,
+    IDerivedGeneralColor,
+    IDerivedTextColor,
+    IDerivedCodeColor,
+    IDerivedLinkColor,
+    IDerivedTypo {
+  colors: IDerivedColorTuple;
+  shades: IDerivedShade;
   sizes: Array<number | string>;
 }
 
-export interface IBuraAnimation {
+export interface IAnimation {
   spinAround: string;
 }
 
-export interface IBuraMixinClass {
+export interface IMixinClass {
   deleteSmall: string;
   deleteMedium: string;
   deleteLarge: string;
   hamburgerActive: string;
 }
 
-export interface IBuraMixin {
-  classes: IBuraMixinClass;
+export interface IMixin {
+  classes: IMixinClass;
 
   arrow(color: ColorHelper): typets.NestedCSSProperties;
   block(): typets.NestedCSSProperties;
@@ -246,10 +246,10 @@ export interface IBuraMixin {
   desktopOnly(css: typets.NestedCSSProperties): typets.NestedCSSProperties;
   widescreen(css: typets.NestedCSSProperties): typets.NestedCSSProperties;
   widescreenOnly(css: typets.NestedCSSProperties): typets.NestedCSSProperties;
-  fullhd(css: typets.NestedCSSProperties): typets.NestedCSSProperties;
+  fullHd(css: typets.NestedCSSProperties): typets.NestedCSSProperties;
 }
 
-export interface IBuraGenericVariable {
+export interface IGenericVariable {
   bodyBackgroundColor: ColorHelper;
   bodySize: number | string;
   bodyRendering:
@@ -273,7 +273,7 @@ export interface IBuraGenericVariable {
   strongWeight: typets.CSSFontWeight;
 }
 
-export interface IBuraHelperStylesheetSize {
+export interface IHelperSheetSize {
   size0: typets.NestedCSSProperties;
   size1: typets.NestedCSSProperties;
   size2: typets.NestedCSSProperties;
@@ -283,7 +283,7 @@ export interface IBuraHelperStylesheetSize {
   size6: typets.NestedCSSProperties;
 }
 
-export interface IBuraHelperStylesheetSizeMobile {
+export interface IHelperSheetSizeMobile {
   size0Mobile: typets.NestedCSSProperties;
   size1Mobile: typets.NestedCSSProperties;
   size2Mobile: typets.NestedCSSProperties;
@@ -293,7 +293,7 @@ export interface IBuraHelperStylesheetSizeMobile {
   size6Mobile: typets.NestedCSSProperties;
 }
 
-export interface IBuraHelperStylesheetSizeTablet {
+export interface IHelperSheetSizeTablet {
   size0Tablet: typets.NestedCSSProperties;
   size1Tablet: typets.NestedCSSProperties;
   size2Tablet: typets.NestedCSSProperties;
@@ -303,7 +303,7 @@ export interface IBuraHelperStylesheetSizeTablet {
   size6Tablet: typets.NestedCSSProperties;
 }
 
-export interface IBuraHelperStylesheetSizeTouch {
+export interface IHelperSheetSizeTouch {
   size0Touch: typets.NestedCSSProperties;
   size1Touch: typets.NestedCSSProperties;
   size2Touch: typets.NestedCSSProperties;
@@ -313,7 +313,7 @@ export interface IBuraHelperStylesheetSizeTouch {
   size6Touch: typets.NestedCSSProperties;
 }
 
-export interface IBuraHelperStylesheetSizeDesktop {
+export interface IHelperSheetSizeDesktop {
   size0Desktop: typets.NestedCSSProperties;
   size1Desktop: typets.NestedCSSProperties;
   size2Desktop: typets.NestedCSSProperties;
@@ -323,7 +323,7 @@ export interface IBuraHelperStylesheetSizeDesktop {
   size6Desktop: typets.NestedCSSProperties;
 }
 
-export interface IBuraHelperStylesheetSizeWidescreen {
+export interface IHelperSheetSizeWidescreen {
   size0Widescreen: typets.NestedCSSProperties;
   size1Widescreen: typets.NestedCSSProperties;
   size2Widescreen: typets.NestedCSSProperties;
@@ -333,7 +333,7 @@ export interface IBuraHelperStylesheetSizeWidescreen {
   size6Widescreen: typets.NestedCSSProperties;
 }
 
-export interface IBuraHelperStylesheetSizeFullHD {
+export interface IHelperSheetSizeFullHD {
   size0FullHd: typets.NestedCSSProperties;
   size1FullHd: typets.NestedCSSProperties;
   size2FullHd: typets.NestedCSSProperties;
@@ -343,106 +343,137 @@ export interface IBuraHelperStylesheetSizeFullHD {
   size6FullHd: typets.NestedCSSProperties;
 }
 
-export interface IBuraHelperTextAlignmentClasses {
-  textAlignCentered: string;
-  textAlignJustified: string;
-  textAlignLeft: string;
-  textAlignRight: string;
+export interface IHelperTextAlignmentClasses {
+  textCentered: string;
+  textJustified: string;
+  textLeft: string;
+  textRight: string;
 
-  textAlignCenteredMobile: string;
-  textAlignJustifiedMobile: string;
-  textAlignLeftMobile: string;
-  textAlignRightMobile: string;
+  textCenteredMobile: string;
+  textJustifiedMobile: string;
+  textLeftMobile: string;
+  textRightMobile: string;
 
-  textAlignCenteredTablet: string;
-  textAlignJustifiedTablet: string;
-  textAlignLeftTablet: string;
-  textAlignRightTablet: string;
+  textCenteredTablet: string;
+  textJustifiedTablet: string;
+  textLeftTablet: string;
+  textRightTablet: string;
 
-  textAlignCenteredTabletOnly: string;
-  textAlignJustifiedTabletOnly: string;
-  textAlignLeftTabletOnly: string;
-  textAlignRightTabletOnly: string;
+  textCenteredTabletOnly: string;
+  textJustifiedTabletOnly: string;
+  textLeftTabletOnly: string;
+  textRightTabletOnly: string;
 
-  textAlignCenteredTouch: string;
-  textAlignJustifiedTouch: string;
-  textAlignLeftTouch: string;
-  textAlignRightTouch: string;
+  textCenteredTouch: string;
+  textJustifiedTouch: string;
+  textLeftTouch: string;
+  textRightTouch: string;
 
-  textAlignCenteredDesktop: string;
-  textAlignJustifiedDesktop: string;
-  textAlignLeftDesktop: string;
-  textAlignRightDesktop: string;
+  textCenteredDesktop: string;
+  textJustifiedDesktop: string;
+  textLeftDesktop: string;
+  textRightDesktop: string;
 
-  textAlignCenteredDesktopOnly: string;
-  textAlignJustifiedDesktopOnly: string;
-  textAlignLeftDesktopOnly: string;
-  textAlignRightDesktopOnly: string;
+  textCenteredDesktopOnly: string;
+  textJustifiedDesktopOnly: string;
+  textLeftDesktopOnly: string;
+  textRightDesktopOnly: string;
 
-  textAlignCenteredWidescreen: string;
-  textAlignJustifiedWidescreen: string;
-  textAlignLeftWidescreen: string;
-  textAlignRightWidescreen: string;
+  textCenteredWidescreen: string;
+  textJustifiedWidescreen: string;
+  textLeftWidescreen: string;
+  textRightWidescreen: string;
 
-  textAlignCenteredWidescreenOnly: string;
-  textAlignJustifiedWidescreenOnly: string;
-  textAlignLeftWidescreenOnly: string;
-  textAlignRightWidescreenOnly: string;
+  textCenteredWidescreenOnly: string;
+  textJustifiedWidescreenOnly: string;
+  textLeftWidescreenOnly: string;
+  textRightWidescreenOnly: string;
 
-  textAlignCenteredFullHd: string;
-  textAlignJustifiedFullHd: string;
-  textAlignLeftFullHd: string;
-  textAlignRightFullHd: string;
+  textCenteredFullHd: string;
+  textJustifiedFullHd: string;
+  textLeftFullHd: string;
+  textRightFullHd: string;
 }
 
-export interface IBuraHelperStylesheet extends IBuraHelperStylesheetSize {
+export interface IHelperTextColor {
+  textBlack: string;
+  textDanger: string;
+  textDark: string;
+  textInfo: string;
+  textLight: string;
+  textLink: string;
+  textPrimary: string;
+  textSuccess: string;
+  textWarning: string;
+  textWhite: string;
+}
+
+export interface IHelperTextShade {
+  textBlackBis: string;
+  textBlackTer: string;
+  textGrey: string;
+  textGreyDark: string;
+  textGreyDarker: string;
+  textGreyLight: string;
+  textWhiteBis: string;
+  textWhiteTer: string;
+}
+
+export interface IHelperSheet extends IHelperSheetSize {
   clearfix: typets.NestedCSSProperties;
   pulledLeft: typets.NestedCSSProperties;
   pulledRight: typets.NestedCSSProperties;
   clipped: typets.NestedCSSProperties;
   overlay: typets.NestedCSSProperties;
+  capitalized: typets.NestedCSSProperties;
+  lowercase: typets.NestedCSSProperties;
+  uppercase: typets.NestedCSSProperties;
+  // italic: typets.NestedCSSProperties;
 }
 
-export type BuraHelperClasses = Record<keyof IBuraHelperStylesheet, string> &
-  Record<keyof IBuraHelperStylesheetSizeMobile, string> &
-  Record<keyof IBuraHelperStylesheetSizeTablet, string> &
-  Record<keyof IBuraHelperStylesheetSizeTouch, string> &
-  Record<keyof IBuraHelperStylesheetSizeDesktop, string> &
-  Record<keyof IBuraHelperStylesheetSizeWidescreen, string> &
-  Record<keyof IBuraHelperStylesheetSizeFullHD, string>;
+export type BuraHelperClasses = Record<keyof IHelperSheet, string> &
+  Record<keyof IHelperSheetSizeMobile, string> &
+  Record<keyof IHelperSheetSizeTablet, string> &
+  Record<keyof IHelperSheetSizeTouch, string> &
+  Record<keyof IHelperSheetSizeDesktop, string> &
+  Record<keyof IHelperSheetSizeWidescreen, string> &
+  Record<keyof IHelperSheetSizeFullHD, string> &
+  IHelperTextAlignmentClasses &
+  IHelperTextColor &
+  IHelperTextShade;
 
-export type BuraHelperStylesheet = Record<
-  keyof IBuraHelperStylesheet,
+export type BuraHelperSheet = Record<
+  keyof IHelperSheet,
   typets.NestedCSSProperties
 >;
 
-export interface IBuraTheme {
-  vars: IBuraVariable;
-  derivedVars: IBuraDerivedVariable;
-  animations: IBuraAnimation;
-  mixins: IBuraMixin;
+export interface ITheme {
+  vars: IVariable;
+  derivedVars: IDerivedVariable;
+  animations: IAnimation;
+  mixins: IMixin;
 
-  genericVars: IBuraGenericVariable;
+  genericVars: IGenericVariable;
   helpers: BuraHelperClasses;
 
-  setVars(vars: Partial<IBuraVariable>): IBuraTheme;
-  setDerivedVars(vars: Partial<IBuraDerivedVariable>): IBuraTheme;
-  setAnimation(animations: Partial<IBuraAnimation>): IBuraTheme;
-  setMixins(mixin: IBuraMixin): IBuraTheme;
+  setVars(vars: Partial<IVariable>): ITheme;
+  setDerivedVars(vars: Partial<IDerivedVariable>): ITheme;
+  setAnimation(animations: Partial<IAnimation>): ITheme;
+  setMixins(mixin: IMixin): ITheme;
 
-  setColor(colors: Partial<IBuraColor>): IBuraTheme;
-  setTypo(typo: Partial<IBuraTypo>): IBuraTheme;
-  setResponsive(responsive: Partial<IBuraResponsive>): IBuraTheme;
-  setMisc(misc: Partial<IBuraMisc>): IBuraTheme;
-  setFlag(flags: Partial<IBuraFlag>): IBuraTheme;
-  setDerivedColor(colors: Partial<IBuraDerivedColor>): IBuraTheme;
-  setDerivedInvertColor(colors: Partial<IBuraDerivedInvertColor>): IBuraTheme;
-  setDerivedGeneralColor(colors: Partial<IBuraDerivedGeneralColor>): IBuraTheme;
-  setDerivedTextColor(colors: Partial<IBuraDerivedTextColor>): IBuraTheme;
-  setDerivedCodeColor(colors: Partial<IBuraDerivedCodeColor>): IBuraTheme;
-  setDerivedLinkColor(colors: Partial<IBuraDerivedLinkColor>): IBuraTheme;
-  setDerivedTypo(typo: Partial<IBuraDerivedTypo>): IBuraTheme;
+  setColor(colors: Partial<IColor>): ITheme;
+  setTypo(typo: Partial<ITypo>): ITheme;
+  setResponsive(responsive: Partial<IResponsive>): ITheme;
+  setMisc(misc: Partial<IMisc>): ITheme;
+  setFlag(flags: Partial<IFlag>): ITheme;
+  setDerivedColor(colors: Partial<IDerivedColor>): ITheme;
+  setDerivedInvertColor(colors: Partial<IDerivedInvertColor>): ITheme;
+  setDerivedGeneralColor(colors: Partial<IDerivedGeneralColor>): ITheme;
+  setDerivedTextColor(colors: Partial<IDerivedTextColor>): ITheme;
+  setDerivedCodeColor(colors: Partial<IDerivedCodeColor>): ITheme;
+  setDerivedLinkColor(colors: Partial<IDerivedLinkColor>): ITheme;
+  setDerivedTypo(typo: Partial<IDerivedTypo>): ITheme;
 
-  withMiniReset(): IBuraTheme;
-  withGeneric(): IBuraTheme;
+  withMiniReset(): ITheme;
+  withGeneric(): ITheme;
 }

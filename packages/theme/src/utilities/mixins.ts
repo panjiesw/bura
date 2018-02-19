@@ -28,12 +28,12 @@ import {
 } from 'csx/lib';
 import { media, style } from 'typestyle';
 import { NestedCSSProperties } from 'typestyle/lib/types';
-import * as types from '../types';
+import * as t from '../types';
 
-export class BuraMixin implements types.IBuraMixin {
-  public classes: types.IBuraMixinClass;
+export class Mixin implements t.IMixin {
+  public classes: t.IMixinClass;
 
-  constructor(private theme: types.IBuraTheme) {
+  constructor(private theme: t.ITheme) {
     this.classes = {
       deleteLarge: style({
         height: px(32),
@@ -336,6 +336,6 @@ export class BuraMixin implements types.IBuraMixin {
       css,
     );
 
-  public fullhd = (css: NestedCSSProperties): NestedCSSProperties =>
+  public fullHd = (css: NestedCSSProperties): NestedCSSProperties =>
     media({ type: 'all', minWidth: this.theme.vars.fullhd }, css);
 }
