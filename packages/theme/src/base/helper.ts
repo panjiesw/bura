@@ -16,14 +16,23 @@
 
 import { ColorHelper, important } from 'csx';
 import { style } from 'typestyle';
+import { NestedCSSProperties } from 'typestyle/lib/types';
 import * as t from '../types';
-import { hyphen } from '../utils';
+import { hyphen, lowerFirst, upperFirst } from '../utils';
 
 interface IAlignment {
   Left: 'left';
   Right: 'right';
   Centered: 'center';
   Justified: 'justify';
+}
+
+interface IDisplay {
+  Block: 'block';
+  Flex: 'flex';
+  Inline: 'inline';
+  InlineBlock: 'inline-block';
+  InlineFlex: 'inline-flex';
 }
 
 type Responsive =
@@ -34,19 +43,6 @@ type Responsive =
   | 'Widescreen'
   | 'Fullhd';
 
-const makeSize = <T>(theme: t.ITheme, target: '' | Responsive = '') =>
-  theme.derived.sizes.reduce<T>(
-    (acc, curr, i) => {
-      const rule = { fontSize: important(`${curr}`) };
-      const cls = `isSize${i}${target}`;
-      acc[cls] = style(theme.mixins[target.toLowerCase()](rule), {
-        $debugName: theme.options.debug ? hyphen(cls) : undefined,
-      });
-      return acc;
-    },
-    {} as any,
-  );
-
 const alignments: IAlignment = {
   Centered: 'center',
   Justified: 'justify',
@@ -54,28 +50,58 @@ const alignments: IAlignment = {
   Right: 'right',
 };
 
+const responsive = [
+  '',
+  'Mobile',
+  'Tablet',
+  'TabletOnly',
+  'Touch',
+  'Desktop',
+  'DesktopOnly',
+  'Widescreen',
+  'WidescreenOnly',
+  'Fullhd',
+];
+
+const displays: IDisplay = {
+  Block: 'block',
+  Flex: 'flex',
+  Inline: 'inline',
+  InlineBlock: 'inline-block',
+  InlineFlex: 'inline-flex',
+};
+
+const makeSize = <T>(theme: t.ITheme, target: '' | Responsive = '') =>
+  theme.derived.sizes.reduce<T>(
+    (acc, curr, i) => {
+      const rule = { fontSize: important(`${curr}`) };
+      const cls = `isSize${i}${target}`;
+      acc[cls] = style(
+        target === '' ? rule : theme.mixins[target.toLowerCase()](rule),
+        {
+          $debugName: theme.options.debug ? hyphen(cls) : undefined,
+        },
+      );
+      return acc;
+    },
+    {} as any,
+  );
+
 const makeTextAlignments = (theme: t.ITheme) =>
-  [
-    '',
-    'Mobile',
-    'Tablet',
-    'TabletOnly',
-    'Touch',
-    'Desktop',
-    'DesktopOnly',
-    'Widescreen',
-    'WidescreenOnly',
-    'Fullhd',
-  ].reduce<t.IHelperTextAlignmentClasses>(
+  responsive.reduce<t.IHelperTextAlignmentClasses>(
     (acc, curr) => {
       for (const index in alignments) {
         if (alignments.hasOwnProperty(index)) {
           const textAlign = important(alignments[index]);
-          const cls = `hasText${alignments[index]}${curr}`;
-          const method = `${curr.charAt(0).toLowerCase()}${curr.slice(1)}`;
-          acc[cls] = style(theme.mixins[method]({ textAlign }), {
-            $debugName: theme.options.debug ? hyphen(cls) : undefined,
-          });
+          const cls = `hasText${index}${curr}`;
+          acc[cls] = style(
+            curr === ''
+              ? { textAlign }
+              : theme.mixins[lowerFirst(curr)]({ textAlign }),
+            {
+              $debugName: theme.options.debug ? hyphen(cls) : undefined,
+            },
+          );
         }
       }
       return acc;
@@ -87,7 +113,7 @@ const makeTextColors = (theme: t.ITheme): t.IHelperTextColor =>
   Object.keys(theme.derived.colors).reduce(
     (acc, curr) => {
       const color: ColorHelper = theme.derived.colors[curr];
-      const cls = `hasText${curr.charAt(0).toUpperCase()}${curr.slice(1)}`;
+      const cls = `hasText${upperFirst(curr)}${curr.slice(1)}`;
       acc[cls] = style({
         $debugName: theme.options.debug ? hyphen(cls) : undefined,
         $nest: {
@@ -110,11 +136,57 @@ const makeTextShades = (theme: t.ITheme): t.IHelperTextShade =>
   Object.keys(theme.derived.shades).reduce(
     (acc, curr) => {
       const color: ColorHelper = theme.derived.shades[curr];
-      const cls = `hasText${curr.charAt(0).toUpperCase()}${curr.slice(1)}`;
+      const cls = `hasText${upperFirst(curr)}${curr.slice(1)}`;
       acc[cls] = style({
         $debugName: theme.options.debug ? hyphen(cls) : undefined,
         color: important(`${color}`),
       });
+    },
+    {} as any,
+  );
+
+const makeDisplays = (theme: t.ITheme): t.IHelperDisplay =>
+  responsive.reduce<t.IHelperDisplay>(
+    (acc, curr) => {
+      for (const index in displays) {
+        if (displays.hasOwnProperty(index)) {
+          const display = important(displays[index]);
+          const cls = `is${index}${curr}`;
+          acc[cls] = style(
+            curr === ''
+              ? { display }
+              : theme.mixins[lowerFirst(curr)]({ display }),
+            {
+              $debugName: theme.options.debug ? hyphen(cls) : undefined,
+            },
+          );
+        }
+      }
+      return acc;
+    },
+    {} as any,
+  );
+
+const makeVisibility = (theme: t.ITheme): t.IHelperVisibility =>
+  responsive.reduce<t.IHelperVisibility>(
+    (acc, curr) => {
+      const debug = theme.options.debug;
+      const clsHidden = `isHidden${curr}`;
+      const ruleHidden: NestedCSSProperties = { display: important('none') };
+      const clsInvis = `isInvisible${curr}`;
+      const ruleInvis: NestedCSSProperties = {
+        visibility: important('hidden'),
+      };
+      acc[clsHidden] = style(
+        curr === '' ? ruleHidden : theme.mixins[lowerFirst(curr)](ruleHidden),
+        { $debugName: debug ? hyphen(clsHidden) : undefined },
+      );
+      acc[clsInvis] = style(
+        curr === '' ? ruleInvis : theme.mixins[lowerFirst(curr)](ruleInvis),
+        { $debugName: debug ? hyphen(clsInvis) : undefined },
+      );
+
+      return acc;
     },
     {} as any,
   );
@@ -204,5 +276,7 @@ export function createHelperClasses(theme: t.ITheme): t.BuraHelperClasses {
       $debugName: debug ? 'is-unselectable' : undefined,
       ...theme.mixins.unselectable(),
     }),
+    ...makeDisplays(theme),
+    ...makeVisibility(theme),
   };
 }

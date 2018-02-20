@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/panjiesw/bura#readme",
   "scripts": {
-    "b:es": "tsc -d --declarationDir lib",
+    "b:es": "tsc",
     "b:lib": "tsc -m commonjs --outDir lib",
     "build": "run-s del b:*",
     "del": "del-cli es lib umd",

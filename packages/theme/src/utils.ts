@@ -67,3 +67,11 @@ export function findColorInvert(color: ColorHelper): ColorHelper {
 export function hyphen(str: string): string {
   return str.replace(/([a-zA-Z0-9])(?=[A-Z0-9])/g, '$1-').toLowerCase();
 }
+
+export function lowerFirst(str: string): string {
+  return `${str.charAt(0).toLowerCase()}${str.slice(1)}`;
+}
+
+export function upperFirst(str: string): string {
+  return `${str.charAt(0).toUpperCase()}${str.slice(1)}`;
+}
