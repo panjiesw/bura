@@ -340,6 +340,6 @@ export class Mixin implements t.IMixin {
       css,
     );
 
-  public fullHd = (css: NestedCSSProperties): NestedCSSProperties =>
+  public fullhd = (css: NestedCSSProperties): NestedCSSProperties =>
     media({ type: 'all', minWidth: this.theme.init.fullhd }, css);
 }

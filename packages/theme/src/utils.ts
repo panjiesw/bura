@@ -16,7 +16,7 @@
 
 import { ColorHelper, rgba, white } from 'csx';
 
-function powerNumber(num: number, exp: number): number {
+export function powerNumber(num: number, exp: number): number {
   let value = 1;
   if (exp > 0) {
     for (let i = 1; i <= exp; i++) {
@@ -30,7 +30,7 @@ function powerNumber(num: number, exp: number): number {
   return value;
 }
 
-function colorLuminance(color: ColorHelper): number {
+export function colorLuminance(color: ColorHelper): number {
   let colorRgb = {
     red: color.red(),
     // tslint:disable-next-line:object-literal-sort-keys
@@ -57,11 +57,13 @@ function colorLuminance(color: ColorHelper): number {
   );
 }
 
-function findColorInvert(color: ColorHelper): ColorHelper {
+export function findColorInvert(color: ColorHelper): ColorHelper {
   if (colorLuminance(color) > 0.55) {
     return rgba(0, 0, 0, 0.7);
   }
   return white;
 }
 
-export { powerNumber, colorLuminance, findColorInvert };
+export function hyphen(str: string): string {
+  return str.replace(/([a-zA-Z0-9])(?=[A-Z0-9])/g, '$1-').toLowerCase();
+}

@@ -57,11 +57,11 @@ export interface ITypo {
   size5: number | string;
   size6: number | string;
   size7: number | string;
-  weightLight: number;
-  weightNormal: number;
-  weightMedium: number;
-  weightSemibold: number;
-  weightBold: number;
+  weightLight: typets.CSSFontWeight;
+  weightNormal: typets.CSSFontWeight;
+  weightMedium: typets.CSSFontWeight;
+  weightSemibold: typets.CSSFontWeight;
+  weightBold: typets.CSSFontWeight;
 }
 
 export interface IResponsive {
@@ -222,161 +222,259 @@ export interface IGenericVariable {
 }
 
 export interface IHelperSize {
-  size0: string;
-  size1: string;
-  size2: string;
-  size3: string;
-  size4: string;
-  size5: string;
-  size6: string;
+  isSize0: string;
+  isSize1: string;
+  isSize2: string;
+  isSize3: string;
+  isSize4: string;
+  isSize5: string;
+  isSize6: string;
 }
 
 export interface IHelperSizeMobile {
-  size0Mobile: string;
-  size1Mobile: string;
-  size2Mobile: string;
-  size3Mobile: string;
-  size4Mobile: string;
-  size5Mobile: string;
-  size6Mobile: string;
+  isSize0Mobile: string;
+  isSize1Mobile: string;
+  isSize2Mobile: string;
+  isSize3Mobile: string;
+  isSize4Mobile: string;
+  isSize5Mobile: string;
+  isSize6Mobile: string;
 }
 
 export interface IHelperSizeTablet {
-  size0Tablet: string;
-  size1Tablet: string;
-  size2Tablet: string;
-  size3Tablet: string;
-  size4Tablet: string;
-  size5Tablet: string;
-  size6Tablet: string;
+  isSize0Tablet: string;
+  isSize1Tablet: string;
+  isSize2Tablet: string;
+  isSize3Tablet: string;
+  isSize4Tablet: string;
+  isSize5Tablet: string;
+  isSize6Tablet: string;
 }
 
 export interface IHelperSizeTouch {
-  size0Touch: string;
-  size1Touch: string;
-  size2Touch: string;
-  size3Touch: string;
-  size4Touch: string;
-  size5Touch: string;
-  size6Touch: string;
+  isSize0Touch: string;
+  isSize1Touch: string;
+  isSize2Touch: string;
+  isSize3Touch: string;
+  isSize4Touch: string;
+  isSize5Touch: string;
+  isSize6Touch: string;
 }
 
 export interface IHelperSizeDesktop {
-  size0Desktop: string;
-  size1Desktop: string;
-  size2Desktop: string;
-  size3Desktop: string;
-  size4Desktop: string;
-  size5Desktop: string;
-  size6Desktop: string;
+  isSize0Desktop: string;
+  isSize1Desktop: string;
+  isSize2Desktop: string;
+  isSize3Desktop: string;
+  isSize4Desktop: string;
+  isSize5Desktop: string;
+  isSize6Desktop: string;
 }
 
 export interface IHelperSizeWidescreen {
-  size0Widescreen: string;
-  size1Widescreen: string;
-  size2Widescreen: string;
-  size3Widescreen: string;
-  size4Widescreen: string;
-  size5Widescreen: string;
-  size6Widescreen: string;
+  isSize0Widescreen: string;
+  isSize1Widescreen: string;
+  isSize2Widescreen: string;
+  isSize3Widescreen: string;
+  isSize4Widescreen: string;
+  isSize5Widescreen: string;
+  isSize6Widescreen: string;
 }
 
 export interface IHelperSizeFullHD {
-  size0FullHd: string;
-  size1FullHd: string;
-  size2FullHd: string;
-  size3FullHd: string;
-  size4FullHd: string;
-  size5FullHd: string;
-  size6FullHd: string;
+  isSize0Fullhd: string;
+  isSize1Fullhd: string;
+  isSize2Fullhd: string;
+  isSize3Fullhd: string;
+  isSize4Fullhd: string;
+  isSize5Fullhd: string;
+  isSize6Fullhd: string;
 }
 
 export interface IHelperTextAlignmentClasses {
-  textCentered: string;
-  textJustified: string;
-  textLeft: string;
-  textRight: string;
+  hasTextCentered: string;
+  hasTextJustified: string;
+  hasTextLeft: string;
+  hasTextRight: string;
 
-  textCenteredMobile: string;
-  textJustifiedMobile: string;
-  textLeftMobile: string;
-  textRightMobile: string;
+  hasTextCenteredMobile: string;
+  hasTextJustifiedMobile: string;
+  hasTextLeftMobile: string;
+  hasTextRightMobile: string;
 
-  textCenteredTablet: string;
-  textJustifiedTablet: string;
-  textLeftTablet: string;
-  textRightTablet: string;
+  hasTextCenteredTablet: string;
+  hasTextJustifiedTablet: string;
+  hasTextLeftTablet: string;
+  hasTextRightTablet: string;
 
-  textCenteredTabletOnly: string;
-  textJustifiedTabletOnly: string;
-  textLeftTabletOnly: string;
-  textRightTabletOnly: string;
+  hasTextCenteredTabletOnly: string;
+  hasTextJustifiedTabletOnly: string;
+  hasTextLeftTabletOnly: string;
+  hasTextRightTabletOnly: string;
 
-  textCenteredTouch: string;
-  textJustifiedTouch: string;
-  textLeftTouch: string;
-  textRightTouch: string;
+  hasTextCenteredTouch: string;
+  hasTextJustifiedTouch: string;
+  hasTextLeftTouch: string;
+  hasTextRightTouch: string;
 
-  textCenteredDesktop: string;
-  textJustifiedDesktop: string;
-  textLeftDesktop: string;
-  textRightDesktop: string;
+  hasTextCenteredDesktop: string;
+  hasTextJustifiedDesktop: string;
+  hasTextLeftDesktop: string;
+  hasTextRightDesktop: string;
 
-  textCenteredDesktopOnly: string;
-  textJustifiedDesktopOnly: string;
-  textLeftDesktopOnly: string;
-  textRightDesktopOnly: string;
+  hasTextCenteredDesktopOnly: string;
+  hasTextJustifiedDesktopOnly: string;
+  hasTextLeftDesktopOnly: string;
+  hasTextRightDesktopOnly: string;
 
-  textCenteredWidescreen: string;
-  textJustifiedWidescreen: string;
-  textLeftWidescreen: string;
-  textRightWidescreen: string;
+  hasTextCenteredWidescreen: string;
+  hasTextJustifiedWidescreen: string;
+  hasTextLeftWidescreen: string;
+  hasTextRightWidescreen: string;
 
-  textCenteredWidescreenOnly: string;
-  textJustifiedWidescreenOnly: string;
-  textLeftWidescreenOnly: string;
-  textRightWidescreenOnly: string;
+  hasTextCenteredWidescreenOnly: string;
+  hasTextJustifiedWidescreenOnly: string;
+  hasTextLeftWidescreenOnly: string;
+  hasTextRightWidescreenOnly: string;
 
-  textCenteredFullHd: string;
-  textJustifiedFullHd: string;
-  textLeftFullHd: string;
-  textRightFullHd: string;
+  hasTextCenteredFullhd: string;
+  hasTextJustifiedFullhd: string;
+  hasTextLeftFullhd: string;
+  hasTextRightFullhd: string;
 }
 
 export interface IHelperTextColor {
-  textBlack: string;
-  textDanger: string;
-  textDark: string;
-  textInfo: string;
-  textLight: string;
-  textLink: string;
-  textPrimary: string;
-  textSuccess: string;
-  textWarning: string;
-  textWhite: string;
+  hasTextBlack: string;
+  hasTextDanger: string;
+  hasTextDark: string;
+  hasTextInfo: string;
+  hasTextLight: string;
+  hasTextLink: string;
+  hasTextPrimary: string;
+  hasTextSuccess: string;
+  hasTextWarning: string;
+  hasTextWhite: string;
 }
 
 export interface IHelperTextShade {
-  textBlackBis: string;
-  textBlackTer: string;
-  textGrey: string;
-  textGreyDark: string;
-  textGreyDarker: string;
-  textGreyLight: string;
-  textWhiteBis: string;
-  textWhiteTer: string;
+  hasTextBlackBis: string;
+  hasTextBlackTer: string;
+  hasTextGrey: string;
+  hasTextGreyDark: string;
+  hasTextGreyDarker: string;
+  hasTextGreyLight: string;
+  hasTextWhiteBis: string;
+  hasTextWhiteTer: string;
+}
+
+export interface IHelperTextWeight {
+  hasTextWeightBold: string;
+  hasTextWeightLight: string;
+  hasTextWeightNormal: string;
+  hasTextWeightSemibold: string;
+}
+
+export interface IHelperDisplay {
+  isBlock: string;
+  isFlex: string;
+  isInline: string;
+  isInlineBlock: string;
+  isInlineFlex: string;
+
+  isBlockMobile: string;
+  isFlexMobile: string;
+  isInlineMobile: string;
+  isInlineBlockMobile: string;
+  isInlineFlexMobile: string;
+
+  isBlockTablet: string;
+  isFlexTablet: string;
+  isInlineTablet: string;
+  isInlineBlockTablet: string;
+  isInlineFlexTablet: string;
+
+  isBlockTableOnly: string;
+  isFlexTableOnly: string;
+  isInlineTableOnly: string;
+  isInlineBlockTableOnly: string;
+  isInlineFlexTableOnly: string;
+
+  isBlockTouch: string;
+  isFlexTouch: string;
+  isInlineTouch: string;
+  isInlineBlockTouch: string;
+  isInlineFlexTouch: string;
+
+  isBlockDesktop: string;
+  isFlexDesktop: string;
+  isInlineDesktop: string;
+  isInlineBlockDesktop: string;
+  isInlineFlexDesktop: string;
+
+  isBlockDesktopOnly: string;
+  isFlexDesktopOnly: string;
+  isInlineDesktopOnly: string;
+  isInlineBlockDesktopOnly: string;
+  isInlineFlexDesktopOnly: string;
+
+  isBlockWidescreen: string;
+  isFlexWidescreen: string;
+  isInlineWidescreen: string;
+  isInlineBlockWidescreen: string;
+  isInlineFlexWidescreen: string;
+
+  isBlockWidescreenOnly: string;
+  isFlexWidescreenOnly: string;
+  isInlineWidescreenOnly: string;
+  isInlineBlockWidescreenOnly: string;
+  isInlineFlexWidescreenOnly: string;
+
+  isBlockFullhd: string;
+  isFlexFullhd: string;
+  isInlineFullhd: string;
+  isInlineBlockFullhd: string;
+  isInlineFlexFullhd: string;
+}
+
+export interface IHelperVisibility {
+  isHidden: string;
+  isHiddenMobile: string;
+  isHiddenTablet: string;
+  isHiddenTabletOnly: string;
+  isHiddenTouch: string;
+  isHiddenDesktop: string;
+  isHiddenDesktopOnly: string;
+  isHiddenWidescreen: string;
+  isHiddenWidescreenOnly: string;
+  isHiddenFullhd: string;
+
+  isInvisible: string;
+  isInvisibleMobile: string;
+  isInvisibleTablet: string;
+  isInvisibleTabletOnly: string;
+  isInvisibleTouch: string;
+  isInvisibleDesktop: string;
+  isInvisibleDesktopOnly: string;
+  isInvisibleWidescreen: string;
+  isInvisibleWidescreenOnly: string;
+  isInvisibleFullhd: string;
 }
 
 export interface IHelperOther {
-  clearfix: string;
-  pulledLeft: string;
-  pulledRight: string;
-  clipped: string;
-  overlay: string;
-  capitalized: string;
-  lowercase: string;
-  uppercase: string;
-  // italic: typets.NestedCSSProperties;
+  isClearfix: string;
+  isPulledLeft: string;
+  isPulledRight: string;
+  isClipped: string;
+  isOverlay: string;
+  isCapitalized: string;
+  isLowercase: string;
+  isUppercase: string;
+  isItalic: string;
+  isMarginless: string;
+  isPaddingless: string;
+  isRadiusless: string;
+  isShadowless: string;
+  isUnselectable: string;
 }
 
 export type BuraHelperClasses = IHelperOther &
@@ -389,7 +487,10 @@ export type BuraHelperClasses = IHelperOther &
   IHelperSizeFullHD &
   IHelperTextAlignmentClasses &
   IHelperTextColor &
-  IHelperTextShade;
+  IHelperTextShade &
+  IHelperTextWeight &
+  IHelperDisplay &
+  IHelperVisibility;
 
 export interface IMixinClass {
   deleteSmall: string;
@@ -435,7 +536,7 @@ export interface IMixin {
   desktopOnly(css: typets.NestedCSSProperties): typets.NestedCSSProperties;
   widescreen(css: typets.NestedCSSProperties): typets.NestedCSSProperties;
   widescreenOnly(css: typets.NestedCSSProperties): typets.NestedCSSProperties;
-  fullHd(css: typets.NestedCSSProperties): typets.NestedCSSProperties;
+  fullhd(css: typets.NestedCSSProperties): typets.NestedCSSProperties;
 }
 
 export type VariablesFactory = (theme: ITheme) => IThemeConfig;
