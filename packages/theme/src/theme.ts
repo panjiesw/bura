@@ -25,16 +25,20 @@ import { Mixin } from './utilities/mixins';
 import { vars } from './utilities/vars';
 
 export class Theme implements types.ITheme {
-  public vars: types.IVariable;
-  public derivedVars: types.IDerivedVariable;
+  public init: types.IVariable;
+  public derived: types.IDerivedVariable;
   public animations: types.IAnimation;
   public mixins: types.IMixin;
-  public genericVars: types.IGenericVariable;
+  public generic: types.IGenericVariable;
   public helpers: types.BuraHelperClasses;
 
-  constructor() {
-    this.vars = vars;
-    this.derivedVars = createDerivedVars(this);
+  constructor(
+    public options: types.IThemeOption = {
+      debug: process.env.NODE_ENV !== 'production',
+    },
+  ) {
+    this.init = vars;
+    this.derived = createDerivedVars(this);
     this.animations = {
       spinAround: keyframes({
         from: {
@@ -46,7 +50,7 @@ export class Theme implements types.ITheme {
       }),
     };
     this.mixins = new Mixin(this);
-    this.genericVars = createGenericVars(this);
+    this.generic = createGenericVars(this);
     this.helpers = createHelperClasses(this);
   }
 
@@ -60,154 +64,17 @@ export class Theme implements types.ITheme {
     return this;
   }
 
-  public setVars(variables: Partial<types.IVariable>): types.ITheme {
-    this.vars = {
-      ...this.vars,
-      ...variables,
-    };
-    this.derivedVars = createDerivedVars(this);
-    return this;
-  }
-
-  public setDerivedVars(
-    variables: Partial<types.IDerivedVariable>,
-  ): types.ITheme {
-    this.derivedVars = {
-      ...this.derivedVars,
-      ...variables,
-    };
-    return this;
-  }
-
-  public setAnimation(
-    animations: Partial<types.IAnimation>,
-  ): types.ITheme {
-    this.animations = {
-      ...this.animations,
-      ...animations,
-    };
-    return this;
-  }
-
-  public setMixins(mixin: types.IMixin): types.ITheme {
-    this.mixins = mixin;
-    return this;
-  }
-
-  public setColor(colors: Partial<types.IColor>): types.ITheme {
-    this.vars = {
-      ...this.vars,
-      ...colors,
-    };
-    this.derivedVars = createDerivedVars(this);
-    return this;
-  }
-
-  public setTypo(typo: Partial<types.ITypo>): types.ITheme {
-    this.vars = {
-      ...this.vars,
-      ...typo,
-    };
-    this.derivedVars = createDerivedVars(this);
-    return this;
-  }
-
-  public setResponsive(
-    responsive: Partial<types.IResponsive>,
-  ): types.ITheme {
-    this.vars = {
-      ...this.vars,
-      ...responsive,
-    };
-    this.derivedVars = createDerivedVars(this);
-    return this;
-  }
-
-  public setMisc(misc: Partial<types.IMisc>): types.ITheme {
-    this.vars = {
-      ...this.vars,
-      ...misc,
-    };
-    this.derivedVars = createDerivedVars(this);
-    return this;
-  }
-
-  public setFlag(flags: Partial<types.IFlag>): types.ITheme {
-    this.vars = {
-      ...this.vars,
-      ...flags,
-    };
-    this.derivedVars = createDerivedVars(this);
-    return this;
-  }
-
-  public setDerivedColor(
-    colors: Partial<types.IDerivedColor>,
-  ): types.ITheme {
-    this.derivedVars = {
-      ...this.derivedVars,
-      ...colors,
-    };
-    return this;
-  }
-
-  public setDerivedInvertColor(
-    colors: Partial<types.IDerivedInvertColor>,
-  ): types.ITheme {
-    this.derivedVars = {
-      ...this.derivedVars,
-      ...colors,
-    };
-    return this;
-  }
-
-  public setDerivedGeneralColor(
-    colors: Partial<types.IDerivedGeneralColor>,
-  ): types.ITheme {
-    this.derivedVars = {
-      ...this.derivedVars,
-      ...colors,
-    };
-    return this;
-  }
-
-  public setDerivedTextColor(
-    colors: Partial<types.IDerivedTextColor>,
-  ): types.ITheme {
-    this.derivedVars = {
-      ...this.derivedVars,
-      ...colors,
-    };
-    return this;
-  }
-
-  public setDerivedCodeColor(
-    colors: Partial<types.IDerivedCodeColor>,
-  ): types.ITheme {
-    this.derivedVars = {
-      ...this.derivedVars,
-      ...colors,
-    };
-    return this;
-  }
-
-  public setDerivedLinkColor(
-    colors: Partial<types.IDerivedLinkColor>,
-  ): types.ITheme {
-    this.derivedVars = {
-      ...this.derivedVars,
-      ...colors,
-    };
-    return this;
-  }
-
-  public setDerivedTypo(
-    typo: Partial<types.IDerivedTypo>,
-  ): types.ITheme {
-    this.derivedVars = {
-      ...this.derivedVars,
-      ...typo,
-    };
+  public withVars(factory: types.VariablesFactory): types.ITheme {
+    const _vars = factory(this);
+    if (_vars.init) {
+      this.init = { ...this.init, ..._vars.init };
+    }
+    this.derived = createDerivedVars(this, _vars.derived);
+    if (_vars.animations) {
+      this.animations = { ...this.animations, ..._vars.animations };
+    }
+    this.generic = createGenericVars(this, _vars.generic);
+    this.helpers = createHelperClasses(this);
     return this;
   }
 }

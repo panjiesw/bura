@@ -15,7 +15,7 @@
  */
 
 import { ColorHelper, important } from 'csx';
-import { style, stylesheet } from 'typestyle';
+import { style } from 'typestyle';
 import * as t from '../types';
 
 interface IAlignment {
@@ -34,7 +34,7 @@ type Responsive =
   | 'FullHd';
 
 const makeSize = <T>(theme: t.ITheme, target: '' | Responsive = '') =>
-  theme.derivedVars.sizes.reduce<T>(
+  theme.derived.sizes.reduce<T>(
     (acc, curr, i) => {
       const rule = { fontSize: important(`${curr}`) };
       const cls = `size${i}${target}`;
@@ -42,7 +42,7 @@ const makeSize = <T>(theme: t.ITheme, target: '' | Responsive = '') =>
         target === ''
           ? rule
           : style(theme.mixins[target.toLowerCase()](rule), {
-              $debugName: cls,
+              $debugName: theme.options.debug ? cls : undefined,
             });
       return acc;
     },
@@ -76,7 +76,7 @@ const makeTextAlignments = (theme: t.ITheme) =>
           const cls = `text${alignments[index]}${curr}`;
           const method = `${curr.charAt(0).toLowerCase()}${curr.slice(1)}`;
           acc[cls] = style(theme.mixins[method]({ textAlign }), {
-            $debugName: cls,
+            $debugName: theme.options.debug ? cls : undefined,
           });
         }
       }
@@ -86,10 +86,12 @@ const makeTextAlignments = (theme: t.ITheme) =>
   );
 
 const makeTextColors = (theme: t.ITheme): t.IHelperTextColor =>
-  Object.keys(theme.derivedVars.colors).reduce(
+  Object.keys(theme.derived.colors).reduce(
     (acc, curr) => {
-      const color: ColorHelper = theme.derivedVars.colors[curr];
-      acc[`text${curr.charAt(0).toUpperCase()}${curr.slice(1)}`] = style({
+      const color: ColorHelper = theme.derived.colors[curr];
+      const cls = `text${curr.charAt(0).toUpperCase()}${curr.slice(1)}`;
+      acc[cls] = style({
+        $debugName: theme.options.debug ? cls : undefined,
         $nest: {
           'a&': {
             $nest: {
@@ -107,10 +109,12 @@ const makeTextColors = (theme: t.ITheme): t.IHelperTextColor =>
   );
 
 const makeTextShades = (theme: t.ITheme): t.IHelperTextShade =>
-  Object.keys(theme.derivedVars.shades).reduce(
+  Object.keys(theme.derived.shades).reduce(
     (acc, curr) => {
-      const color: ColorHelper = theme.derivedVars.shades[curr];
-      acc[`text${curr.charAt(0).toUpperCase()}${curr.slice(1)}`] = style({
+      const color: ColorHelper = theme.derived.shades[curr];
+      const cls = `text${curr.charAt(0).toUpperCase()}${curr.slice(1)}`;
+      acc[cls] = style({
+        $debugName: theme.options.debug ? cls : undefined,
         color: important(`${color}`),
       });
     },
@@ -119,39 +123,49 @@ const makeTextShades = (theme: t.ITheme): t.IHelperTextShade =>
 
 export function createHelperClasses(theme: t.ITheme): t.BuraHelperClasses {
   return {
-    ...stylesheet<t.BuraHelperSheet>({
-      capitalized: { textTransform: important('capitalize') },
-      clearfix: { ...theme.mixins.clearfix() },
-      clipped: { overflow: important('hidden') },
-      // italic: {textTransform: important('italic')},
-      lowercase: { textTransform: important('lowercase') },
-      overlay: { ...theme.mixins.overlay() },
-      pulledLeft: { float: important('left') },
-      pulledRight: { float: important('right') },
-      uppercase: { textTransform: important('uppercase') },
-      ...makeSize<t.IHelperSheetSize>(theme),
+    capitalized: style({
+      $debugName: theme.options.debug ? 'capitalized' : undefined,
+      textTransform: important('capitalize'),
     }),
-    ...makeSize<Record<keyof t.IHelperSheetSizeMobile, string>>(
-      theme,
-      'Mobile',
-    ),
-    ...makeSize<Record<keyof t.IHelperSheetSizeTablet, string>>(
-      theme,
-      'Tablet',
-    ),
-    ...makeSize<Record<keyof t.IHelperSheetSizeTouch, string>>(theme, 'Touch'),
-    ...makeSize<Record<keyof t.IHelperSheetSizeDesktop, string>>(
-      theme,
-      'Desktop',
-    ),
-    ...makeSize<Record<keyof t.IHelperSheetSizeWidescreen, string>>(
-      theme,
-      'Widescreen',
-    ),
-    ...makeSize<Record<keyof t.IHelperSheetSizeFullHD, string>>(
-      theme,
-      'FullHd',
-    ),
+    clearfix: style({
+      $debugName: theme.options.debug ? 'clearfix' : undefined,
+      ...theme.mixins.clearfix(),
+    }),
+    clipped: style({
+      $debugName: theme.options.debug ? 'clipped' : undefined,
+      overflow: important('hidden'),
+    }),
+    // italic: style({
+    //   $debugName: theme.options.debug ? '// italic' : undefined,
+    //   textTransform: important('italic'),
+    // }),
+    lowercase: style({
+      $debugName: theme.options.debug ? 'lowercase' : undefined,
+      textTransform: important('lowercase'),
+    }),
+    overlay: style({
+      $debugName: theme.options.debug ? 'overlay' : undefined,
+      ...theme.mixins.overlay(),
+    }),
+    pulledLeft: style({
+      $debugName: theme.options.debug ? 'pulledLeft' : undefined,
+      float: important('left'),
+    }),
+    pulledRight: style({
+      $debugName: theme.options.debug ? 'pulledRight' : undefined,
+      float: important('right'),
+    }),
+    uppercase: style({
+      $debugName: theme.options.debug ? 'uppercase' : undefined,
+      textTransform: important('uppercase'),
+    }),
+    ...makeSize<t.IHelperSize>(theme),
+    ...makeSize<t.IHelperSizeMobile>(theme, 'Mobile'),
+    ...makeSize<t.IHelperSizeTablet>(theme, 'Tablet'),
+    ...makeSize<t.IHelperSizeTouch>(theme, 'Touch'),
+    ...makeSize<t.IHelperSizeDesktop>(theme, 'Desktop'),
+    ...makeSize<t.IHelperSizeWidescreen>(theme, 'Widescreen'),
+    ...makeSize<t.IHelperSizeFullHD>(theme, 'FullHd'),
     ...makeTextAlignments(theme),
     ...makeTextColors(theme),
     ...makeTextShades(theme),

@@ -85,12 +85,7 @@ export interface IFlag {
   variableColumns: boolean;
 }
 
-export interface IVariable
-  extends IColor,
-    ITypo,
-    IResponsive,
-    IMisc,
-    IFlag {}
+export interface IVariable extends IColor, ITypo, IResponsive, IMisc, IFlag {}
 
 export interface IDerivedColor {
   danger: ColorHelper;
@@ -202,53 +197,6 @@ export interface IAnimation {
   spinAround: string;
 }
 
-export interface IMixinClass {
-  deleteSmall: string;
-  deleteMedium: string;
-  deleteLarge: string;
-  hamburgerActive: string;
-}
-
-export interface IMixin {
-  classes: IMixinClass;
-
-  arrow(color: ColorHelper): typets.NestedCSSProperties;
-  block(): typets.NestedCSSProperties;
-  clearfix(): typets.NestedCSSProperties;
-  center(
-    width: number | string,
-    height?: number | string,
-  ): typets.NestedCSSProperties;
-  delete(): typets.NestedCSSProperties;
-  fa(
-    size: string | number,
-    dimensions: string | number,
-  ): typets.NestedCSSProperties;
-  hamburger(dimensions: string | number): typets.NestedCSSProperties;
-  loader(): typets.NestedCSSProperties;
-  overflowTouch(): typets.NestedCSSProperties;
-  overlay(offset?: number | string): typets.NestedCSSProperties;
-  placeholder(content: typets.NestedCSSProperties): typets.NestedCSSProperties;
-  unselectable(): typets.NestedCSSProperties;
-  from(
-    device: string | number,
-    css: typets.NestedCSSProperties,
-  ): typets.NestedCSSProperties;
-  until(
-    device: string | number,
-    css: typets.NestedCSSProperties,
-  ): typets.NestedCSSProperties;
-  mobile(css: typets.NestedCSSProperties): typets.NestedCSSProperties;
-  tablet(css: typets.NestedCSSProperties): typets.NestedCSSProperties;
-  tabletOnly(css: typets.NestedCSSProperties): typets.NestedCSSProperties;
-  touch(css: typets.NestedCSSProperties): typets.NestedCSSProperties;
-  desktop(css: typets.NestedCSSProperties): typets.NestedCSSProperties;
-  desktopOnly(css: typets.NestedCSSProperties): typets.NestedCSSProperties;
-  widescreen(css: typets.NestedCSSProperties): typets.NestedCSSProperties;
-  widescreenOnly(css: typets.NestedCSSProperties): typets.NestedCSSProperties;
-  fullHd(css: typets.NestedCSSProperties): typets.NestedCSSProperties;
-}
-
 export interface IGenericVariable {
   bodyBackgroundColor: ColorHelper;
   bodySize: number | string;
@@ -273,74 +221,74 @@ export interface IGenericVariable {
   strongWeight: typets.CSSFontWeight;
 }
 
-export interface IHelperSheetSize {
-  size0: typets.NestedCSSProperties;
-  size1: typets.NestedCSSProperties;
-  size2: typets.NestedCSSProperties;
-  size3: typets.NestedCSSProperties;
-  size4: typets.NestedCSSProperties;
-  size5: typets.NestedCSSProperties;
-  size6: typets.NestedCSSProperties;
+export interface IHelperSize {
+  size0: string;
+  size1: string;
+  size2: string;
+  size3: string;
+  size4: string;
+  size5: string;
+  size6: string;
 }
 
-export interface IHelperSheetSizeMobile {
-  size0Mobile: typets.NestedCSSProperties;
-  size1Mobile: typets.NestedCSSProperties;
-  size2Mobile: typets.NestedCSSProperties;
-  size3Mobile: typets.NestedCSSProperties;
-  size4Mobile: typets.NestedCSSProperties;
-  size5Mobile: typets.NestedCSSProperties;
-  size6Mobile: typets.NestedCSSProperties;
+export interface IHelperSizeMobile {
+  size0Mobile: string;
+  size1Mobile: string;
+  size2Mobile: string;
+  size3Mobile: string;
+  size4Mobile: string;
+  size5Mobile: string;
+  size6Mobile: string;
 }
 
-export interface IHelperSheetSizeTablet {
-  size0Tablet: typets.NestedCSSProperties;
-  size1Tablet: typets.NestedCSSProperties;
-  size2Tablet: typets.NestedCSSProperties;
-  size3Tablet: typets.NestedCSSProperties;
-  size4Tablet: typets.NestedCSSProperties;
-  size5Tablet: typets.NestedCSSProperties;
-  size6Tablet: typets.NestedCSSProperties;
+export interface IHelperSizeTablet {
+  size0Tablet: string;
+  size1Tablet: string;
+  size2Tablet: string;
+  size3Tablet: string;
+  size4Tablet: string;
+  size5Tablet: string;
+  size6Tablet: string;
 }
 
-export interface IHelperSheetSizeTouch {
-  size0Touch: typets.NestedCSSProperties;
-  size1Touch: typets.NestedCSSProperties;
-  size2Touch: typets.NestedCSSProperties;
-  size3Touch: typets.NestedCSSProperties;
-  size4Touch: typets.NestedCSSProperties;
-  size5Touch: typets.NestedCSSProperties;
-  size6Touch: typets.NestedCSSProperties;
+export interface IHelperSizeTouch {
+  size0Touch: string;
+  size1Touch: string;
+  size2Touch: string;
+  size3Touch: string;
+  size4Touch: string;
+  size5Touch: string;
+  size6Touch: string;
 }
 
-export interface IHelperSheetSizeDesktop {
-  size0Desktop: typets.NestedCSSProperties;
-  size1Desktop: typets.NestedCSSProperties;
-  size2Desktop: typets.NestedCSSProperties;
-  size3Desktop: typets.NestedCSSProperties;
-  size4Desktop: typets.NestedCSSProperties;
-  size5Desktop: typets.NestedCSSProperties;
-  size6Desktop: typets.NestedCSSProperties;
+export interface IHelperSizeDesktop {
+  size0Desktop: string;
+  size1Desktop: string;
+  size2Desktop: string;
+  size3Desktop: string;
+  size4Desktop: string;
+  size5Desktop: string;
+  size6Desktop: string;
 }
 
-export interface IHelperSheetSizeWidescreen {
-  size0Widescreen: typets.NestedCSSProperties;
-  size1Widescreen: typets.NestedCSSProperties;
-  size2Widescreen: typets.NestedCSSProperties;
-  size3Widescreen: typets.NestedCSSProperties;
-  size4Widescreen: typets.NestedCSSProperties;
-  size5Widescreen: typets.NestedCSSProperties;
-  size6Widescreen: typets.NestedCSSProperties;
+export interface IHelperSizeWidescreen {
+  size0Widescreen: string;
+  size1Widescreen: string;
+  size2Widescreen: string;
+  size3Widescreen: string;
+  size4Widescreen: string;
+  size5Widescreen: string;
+  size6Widescreen: string;
 }
 
-export interface IHelperSheetSizeFullHD {
-  size0FullHd: typets.NestedCSSProperties;
-  size1FullHd: typets.NestedCSSProperties;
-  size2FullHd: typets.NestedCSSProperties;
-  size3FullHd: typets.NestedCSSProperties;
-  size4FullHd: typets.NestedCSSProperties;
-  size5FullHd: typets.NestedCSSProperties;
-  size6FullHd: typets.NestedCSSProperties;
+export interface IHelperSizeFullHD {
+  size0FullHd: string;
+  size1FullHd: string;
+  size2FullHd: string;
+  size3FullHd: string;
+  size4FullHd: string;
+  size5FullHd: string;
+  size6FullHd: string;
 }
 
 export interface IHelperTextAlignmentClasses {
@@ -419,61 +367,101 @@ export interface IHelperTextShade {
   textWhiteTer: string;
 }
 
-export interface IHelperSheet extends IHelperSheetSize {
-  clearfix: typets.NestedCSSProperties;
-  pulledLeft: typets.NestedCSSProperties;
-  pulledRight: typets.NestedCSSProperties;
-  clipped: typets.NestedCSSProperties;
-  overlay: typets.NestedCSSProperties;
-  capitalized: typets.NestedCSSProperties;
-  lowercase: typets.NestedCSSProperties;
-  uppercase: typets.NestedCSSProperties;
+export interface IHelperOther {
+  clearfix: string;
+  pulledLeft: string;
+  pulledRight: string;
+  clipped: string;
+  overlay: string;
+  capitalized: string;
+  lowercase: string;
+  uppercase: string;
   // italic: typets.NestedCSSProperties;
 }
 
-export type BuraHelperClasses = Record<keyof IHelperSheet, string> &
-  Record<keyof IHelperSheetSizeMobile, string> &
-  Record<keyof IHelperSheetSizeTablet, string> &
-  Record<keyof IHelperSheetSizeTouch, string> &
-  Record<keyof IHelperSheetSizeDesktop, string> &
-  Record<keyof IHelperSheetSizeWidescreen, string> &
-  Record<keyof IHelperSheetSizeFullHD, string> &
+export type BuraHelperClasses = IHelperOther &
+  IHelperSize &
+  IHelperSizeMobile &
+  IHelperSizeTablet &
+  IHelperSizeTouch &
+  IHelperSizeDesktop &
+  IHelperSizeWidescreen &
+  IHelperSizeFullHD &
   IHelperTextAlignmentClasses &
   IHelperTextColor &
   IHelperTextShade;
 
-export type BuraHelperSheet = Record<
-  keyof IHelperSheet,
-  typets.NestedCSSProperties
->;
+export interface IMixinClass {
+  deleteSmall: string;
+  deleteMedium: string;
+  deleteLarge: string;
+  hamburgerActive: string;
+}
+
+export interface IMixin {
+  classes: IMixinClass;
+
+  arrow(color: ColorHelper): typets.NestedCSSProperties;
+  block(): typets.NestedCSSProperties;
+  clearfix(): typets.NestedCSSProperties;
+  center(
+    width: number | string,
+    height?: number | string,
+  ): typets.NestedCSSProperties;
+  delete(): typets.NestedCSSProperties;
+  fa(
+    size: string | number,
+    dimensions: string | number,
+  ): typets.NestedCSSProperties;
+  hamburger(dimensions: string | number): typets.NestedCSSProperties;
+  loader(): typets.NestedCSSProperties;
+  overflowTouch(): typets.NestedCSSProperties;
+  overlay(offset?: number | string): typets.NestedCSSProperties;
+  placeholder(content: typets.NestedCSSProperties): typets.NestedCSSProperties;
+  unselectable(): typets.NestedCSSProperties;
+  from(
+    device: string | number,
+    css: typets.NestedCSSProperties,
+  ): typets.NestedCSSProperties;
+  until(
+    device: string | number,
+    css: typets.NestedCSSProperties,
+  ): typets.NestedCSSProperties;
+  mobile(css: typets.NestedCSSProperties): typets.NestedCSSProperties;
+  tablet(css: typets.NestedCSSProperties): typets.NestedCSSProperties;
+  tabletOnly(css: typets.NestedCSSProperties): typets.NestedCSSProperties;
+  touch(css: typets.NestedCSSProperties): typets.NestedCSSProperties;
+  desktop(css: typets.NestedCSSProperties): typets.NestedCSSProperties;
+  desktopOnly(css: typets.NestedCSSProperties): typets.NestedCSSProperties;
+  widescreen(css: typets.NestedCSSProperties): typets.NestedCSSProperties;
+  widescreenOnly(css: typets.NestedCSSProperties): typets.NestedCSSProperties;
+  fullHd(css: typets.NestedCSSProperties): typets.NestedCSSProperties;
+}
+
+export type VariablesFactory = (theme: ITheme) => IThemeConfig;
+
+export interface IThemeConfig {
+  init?: Partial<IVariable>;
+  derived?: Partial<IDerivedVariable>;
+  animations?: Partial<IAnimation>;
+  generic?: Partial<IGenericVariable>;
+}
+
+export interface IThemeOption {
+  debug?: boolean;
+}
 
 export interface ITheme {
-  vars: IVariable;
-  derivedVars: IDerivedVariable;
+  options: IThemeOption;
+
+  init: IVariable;
+  derived: IDerivedVariable;
   animations: IAnimation;
   mixins: IMixin;
-
-  genericVars: IGenericVariable;
+  generic: IGenericVariable;
   helpers: BuraHelperClasses;
 
-  setVars(vars: Partial<IVariable>): ITheme;
-  setDerivedVars(vars: Partial<IDerivedVariable>): ITheme;
-  setAnimation(animations: Partial<IAnimation>): ITheme;
-  setMixins(mixin: IMixin): ITheme;
-
-  setColor(colors: Partial<IColor>): ITheme;
-  setTypo(typo: Partial<ITypo>): ITheme;
-  setResponsive(responsive: Partial<IResponsive>): ITheme;
-  setMisc(misc: Partial<IMisc>): ITheme;
-  setFlag(flags: Partial<IFlag>): ITheme;
-  setDerivedColor(colors: Partial<IDerivedColor>): ITheme;
-  setDerivedInvertColor(colors: Partial<IDerivedInvertColor>): ITheme;
-  setDerivedGeneralColor(colors: Partial<IDerivedGeneralColor>): ITheme;
-  setDerivedTextColor(colors: Partial<IDerivedTextColor>): ITheme;
-  setDerivedCodeColor(colors: Partial<IDerivedCodeColor>): ITheme;
-  setDerivedLinkColor(colors: Partial<IDerivedLinkColor>): ITheme;
-  setDerivedTypo(typo: Partial<IDerivedTypo>): ITheme;
-
+  withVars(factory: VariablesFactory): ITheme;
   withMiniReset(): ITheme;
   withGeneric(): ITheme;
 }

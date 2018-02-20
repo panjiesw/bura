@@ -20,37 +20,38 @@ import * as t from '../types';
 
 export function createGenericVars(
   theme: t.ITheme,
+  vars: Partial<t.IGenericVariable> = {},
 ): t.IGenericVariable {
   return {
-    bodyBackgroundColor: theme.vars.white,
-    bodyColor: theme.derivedVars.text,
-    bodyFamily: theme.derivedVars.familyPrimary,
-    bodyLineHeight: 1.5,
-    bodyRendering: 'optimizeLegibility',
-    bodySize: px(16),
-    bodyWeight: theme.vars.weightNormal,
-    codeFamily: theme.derivedVars.familyCode,
-    codePadding: `${em(0.25)} ${em(0.5)} ${em(0.25)}`,
-    codeSize: em(0.875),
-    codeWeight: 'normal',
-    hrBackgroundColor: theme.derivedVars.border,
-    hrHeight: px(1),
-    hrMargin: `${rem(1.5)} 0`,
-    strongColor: theme.derivedVars.textStrong,
-    strongWeight: theme.vars.weightBold,
-  }
+    bodyBackgroundColor: vars.bodyBackgroundColor || theme.init.white,
+    bodyColor: vars.bodyColor || theme.derived.text,
+    bodyFamily: vars.bodyFamily || theme.derived.familyPrimary,
+    bodyLineHeight: vars.bodyLineHeight || 1.5,
+    bodyRendering: vars.bodyRendering || 'optimizeLegibility',
+    bodySize: vars.bodySize || px(16),
+    bodyWeight: vars.bodyWeight || theme.init.weightNormal,
+    codeFamily: vars.codeFamily || theme.derived.familyCode,
+    codePadding: vars.codePadding || `${em(0.25)} ${em(0.5)} ${em(0.25)}`,
+    codeSize: vars.codeSize || em(0.875),
+    codeWeight: vars.codeWeight || 'normal',
+    hrBackgroundColor: vars.hrBackgroundColor || theme.derived.border,
+    hrHeight: vars.hrHeight || px(1),
+    hrMargin: vars.hrMargin || `${rem(1.5)} 0`,
+    strongColor: vars.strongColor || theme.derived.textStrong,
+    strongWeight: vars.strongWeight || theme.init.weightBold,
+  };
 }
 
 export function writeGenericRule(theme: t.ITheme) {
   cssRule('html', {
     '-moz-osx-font-smoothing': 'grayscale',
     '-webkit-font-smoothing': 'antialiased',
-    backgroundColor: `${theme.genericVars.bodyBackgroundColor}`,
-    fontSize: theme.genericVars.bodySize,
+    backgroundColor: `${theme.generic.bodyBackgroundColor}`,
+    fontSize: theme.generic.bodySize,
     minWidth: px(300),
     overflowX: 'hidden',
     overflowY: 'scroll',
-    textRendering: theme.genericVars.bodyRendering,
+    textRendering: theme.generic.bodyRendering,
     textSizeAdjust: percent(100),
   });
 
@@ -59,30 +60,30 @@ export function writeGenericRule(theme: t.ITheme) {
   });
 
   cssRule('body, button, input, select, textarea', {
-    fontFamily: theme.genericVars.bodyFamily,
+    fontFamily: theme.generic.bodyFamily,
   });
 
   cssRule('code, pre', {
     '-moz-osx-font-smoothing': 'auto',
     '-webkit-font-smoothing': 'auto',
-    fontFamily: theme.genericVars.codeFamily,
+    fontFamily: theme.generic.codeFamily,
   });
 
   cssRule('body', {
-    color: `${theme.genericVars.bodyColor}`,
+    color: `${theme.generic.bodyColor}`,
     fontSize: rem(1),
-    fontWeight: theme.genericVars.bodyWeight,
-    lineHeight: theme.genericVars.bodyLineHeight,
+    fontWeight: theme.generic.bodyWeight,
+    lineHeight: theme.generic.bodyLineHeight,
   });
 
   cssRule('a', {
-    color: `${theme.derivedVars.link}`,
+    color: `${theme.derived.link}`,
     cursor: 'pointer',
     textDecoration: 'none',
     // tslint:disable-next-line:object-literal-sort-keys
     $nest: {
       '&:hover': {
-        color: `${theme.derivedVars.linkHover}`,
+        color: `${theme.derived.linkHover}`,
       },
       strong: {
         color: 'currentColor',
@@ -91,19 +92,19 @@ export function writeGenericRule(theme: t.ITheme) {
   });
 
   cssRule('code', {
-    backgroundColor: `${theme.derivedVars.codeBackground}`,
-    color: `${theme.derivedVars.code}`,
-    fontSize: theme.genericVars.codeSize,
-    fontWeight: theme.genericVars.codeWeight,
-    padding: theme.genericVars.codePadding,
+    backgroundColor: `${theme.derived.codeBackground}`,
+    color: `${theme.derived.code}`,
+    fontSize: theme.generic.codeSize,
+    fontWeight: theme.generic.codeWeight,
+    padding: theme.generic.codePadding,
   });
 
   cssRule('hr', {
-    backgroundColor: `${theme.genericVars.hrBackgroundColor}`,
+    backgroundColor: `${theme.generic.hrBackgroundColor}`,
     border: 'none',
     display: 'block',
-    height: theme.genericVars.hrHeight,
-    margin: theme.genericVars.hrMargin,
+    height: theme.generic.hrHeight,
+    margin: theme.generic.hrMargin,
   });
 
   cssRule('img', {
@@ -125,13 +126,13 @@ export function writeGenericRule(theme: t.ITheme) {
   });
 
   cssRule('strong', {
-    color: `${theme.genericVars.strongColor}`,
-    fontWeight: theme.genericVars.strongWeight,
+    color: `${theme.generic.strongColor}`,
+    fontWeight: theme.generic.strongWeight,
   });
 
   cssRule('pre', theme.mixins.overflowTouch(), {
-    backgroundColor: `${theme.derivedVars.preBackground}`,
-    color: `${theme.derivedVars.pre}`,
+    backgroundColor: `${theme.derived.preBackground}`,
+    color: `${theme.derived.pre}`,
     fontSize: em(0.875),
     overflowX: 'auto',
     padding: `${rem(1.25)} ${rem(1.5)}`,
@@ -155,7 +156,7 @@ export function writeGenericRule(theme: t.ITheme) {
         verticalAlign: 'top',
       },
       th: {
-        color: `${theme.derivedVars.textStrong}`,
+        color: `${theme.derived.textStrong}`,
       },
     },
   });

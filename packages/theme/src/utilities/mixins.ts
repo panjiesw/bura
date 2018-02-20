@@ -36,6 +36,7 @@ export class Mixin implements t.IMixin {
   constructor(private theme: t.ITheme) {
     this.classes = {
       deleteLarge: style({
+        $debugName: theme.options.debug ? 'deleteLarge' : undefined,
         height: px(32),
         maxHeight: px(32),
         maxWidth: px(32),
@@ -44,6 +45,7 @@ export class Mixin implements t.IMixin {
         width: px(32),
       }),
       deleteMedium: style({
+        $debugName: theme.options.debug ? 'deleteMedium' : undefined,
         height: px(24),
         maxHeight: px(24),
         maxWidth: px(24),
@@ -52,6 +54,7 @@ export class Mixin implements t.IMixin {
         width: px(24),
       }),
       deleteSmall: style({
+        $debugName: theme.options.debug ? 'deleteSmall' : undefined,
         height: px(16),
         maxHeight: px(16),
         maxWidth: px(16),
@@ -60,6 +63,7 @@ export class Mixin implements t.IMixin {
         width: px(16),
       }),
       hamburgerActive: style({
+        $debugName: theme.options.debug ? 'hamburgerActive' : undefined,
         $nest: {
           span: {
             $nest: {
@@ -125,9 +129,9 @@ export class Mixin implements t.IMixin {
     ...this.unselectable(),
     '-moz-appearance': 'none',
     '-webkit-appearance': 'none',
-    backgroundColor: `${this.theme.vars.black.fade(0.2)}`,
+    backgroundColor: `${this.theme.init.black.fade(0.2)}`,
     border: 'none',
-    borderRadius: this.theme.vars.radiusRounded,
+    borderRadius: this.theme.init.radiusRounded,
     cursor: 'pointer',
     display: 'inline-block',
     flexGrow: 0,
@@ -145,7 +149,7 @@ export class Mixin implements t.IMixin {
     // tslint:disable-next-line:object-literal-sort-keys
     $nest: {
       '&:before, &:after': {
-        backgroundColor: `${this.theme.vars.white}`,
+        backgroundColor: `${this.theme.init.white}`,
         content: '""',
         display: 'block',
         left: percent(50),
@@ -166,10 +170,10 @@ export class Mixin implements t.IMixin {
         width: px(2),
       },
       '&:hover, &:focus': {
-        backgroundColor: `${this.theme.vars.black.fade(0.3)}`,
+        backgroundColor: `${this.theme.init.black.fade(0.3)}`,
       },
       '&:active': {
-        backgroundColor: `${this.theme.vars.black.fade(0.4)}`,
+        backgroundColor: `${this.theme.init.black.fade(0.4)}`,
       },
     },
   });
@@ -202,9 +206,9 @@ export class Mixin implements t.IMixin {
         left: calc(`${percent(50)} - ${px(8)}`),
         position: 'absolute',
         transformOrigin: 'center',
-        transitionDuration: this.theme.vars.speed,
+        transitionDuration: this.theme.init.speed,
         transitionProperty: 'background-color, opacity, transform',
-        transitionTimingFunction: this.theme.vars.easing,
+        transitionTimingFunction: this.theme.init.easing,
         width: px(16),
 
         $nest: {
@@ -221,15 +225,15 @@ export class Mixin implements t.IMixin {
       },
       // tslint:disable-next-line:object-literal-sort-keys
       '&:hover': {
-        backgroundColor: `${this.theme.vars.black.fade(0.05)}`,
+        backgroundColor: `${this.theme.init.black.fade(0.05)}`,
       },
     },
   });
 
   public loader = (): NestedCSSProperties => ({
     animation: `${this.theme.animations.spinAround} 500ms infinite linear`,
-    border: `${px(2)} solid ${this.theme.derivedVars.border}`,
-    borderRadius: this.theme.vars.radiusRounded,
+    border: `${px(2)} solid ${this.theme.derived.border}`,
+    borderRadius: this.theme.init.radiusRounded,
     borderRightColor: 'transparent',
     borderTopColor: 'transparent',
     content: '""',
@@ -282,20 +286,20 @@ export class Mixin implements t.IMixin {
   public mobile = (css: NestedCSSProperties): NestedCSSProperties =>
     media(
       {
-        maxWidth: px(parseInt('' + this.theme.vars.tablet, 10) - 1),
+        maxWidth: px(parseInt('' + this.theme.init.tablet, 10) - 1),
         type: 'screen',
       },
       css,
     );
 
   public tablet = (css: NestedCSSProperties): NestedCSSProperties =>
-    media({ type: 'all', minWidth: this.theme.vars.tablet }, css);
+    media({ type: 'all', minWidth: this.theme.init.tablet }, css);
 
   public tabletOnly = (css: NestedCSSProperties): NestedCSSProperties =>
     media(
       {
-        maxWidth: px(parseInt('' + this.theme.vars.desktop, 10) - 1),
-        minWidth: this.theme.vars.tablet,
+        maxWidth: px(parseInt('' + this.theme.init.desktop, 10) - 1),
+        minWidth: this.theme.init.tablet,
         type: 'all',
       },
       css,
@@ -304,38 +308,38 @@ export class Mixin implements t.IMixin {
   public touch = (css: NestedCSSProperties): NestedCSSProperties =>
     media(
       {
-        maxWidth: px(parseInt('' + this.theme.vars.desktop, 10) - 1),
+        maxWidth: px(parseInt('' + this.theme.init.desktop, 10) - 1),
         type: 'screen',
       },
       css,
     );
 
   public desktop = (css: NestedCSSProperties): NestedCSSProperties =>
-    media({ type: 'all', minWidth: this.theme.vars.desktop }, css);
+    media({ type: 'all', minWidth: this.theme.init.desktop }, css);
 
   public desktopOnly = (css: NestedCSSProperties): NestedCSSProperties =>
     media(
       {
-        maxWidth: px(parseInt('' + this.theme.vars.widescreen, 10) - 1),
-        minWidth: this.theme.vars.desktop,
+        maxWidth: px(parseInt('' + this.theme.init.widescreen, 10) - 1),
+        minWidth: this.theme.init.desktop,
         type: 'all',
       },
       css,
     );
 
   public widescreen = (css: NestedCSSProperties): NestedCSSProperties =>
-    media({ type: 'all', minWidth: this.theme.vars.widescreen }, css);
+    media({ type: 'all', minWidth: this.theme.init.widescreen }, css);
 
   public widescreenOnly = (css: NestedCSSProperties): NestedCSSProperties =>
     media(
       {
-        maxWidth: px(parseInt('' + this.theme.vars.fullhd, 10) - 1),
-        minWidth: this.theme.vars.widescreen,
+        maxWidth: px(parseInt('' + this.theme.init.fullhd, 10) - 1),
+        minWidth: this.theme.init.widescreen,
         type: 'all',
       },
       css,
     );
 
   public fullHd = (css: NestedCSSProperties): NestedCSSProperties =>
-    media({ type: 'all', minWidth: this.theme.vars.fullhd }, css);
+    media({ type: 'all', minWidth: this.theme.init.fullhd }, css);
 }

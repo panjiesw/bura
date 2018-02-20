@@ -19,87 +19,89 @@ import { findColorInvert } from '../utils';
 
 export function createDerivedVars(
   theme: t.ITheme,
+  usr: Partial<t.IDerivedVariable> = {},
 ): t.IDerivedVariable {
   const colors: t.IDerivedColor = {
-    danger: theme.vars.red,
-    dark: theme.vars.greyDarker,
-    info: theme.vars.cyan,
-    light: theme.vars.whiteTer,
-    primary: theme.vars.turquoise,
-    success: theme.vars.green,
-    warning: theme.vars.yellow,
+    danger: usr.danger || theme.init.red,
+    dark: usr.dark || theme.init.greyDarker,
+    info: usr.info || theme.init.cyan,
+    light: usr.light || theme.init.whiteTer,
+    primary: usr.primary || theme.init.turquoise,
+    success: usr.success || theme.init.green,
+    warning: usr.warning || theme.init.yellow,
   };
 
-  const yellowInvert = findColorInvert(theme.vars.yellow);
-  const greenInvert = findColorInvert(theme.vars.green);
-  const turquoiseInvert = findColorInvert(theme.vars.turquoise);
-  const cyanInvert = findColorInvert(theme.vars.cyan);
-  const blueInvert = findColorInvert(theme.vars.blue);
-  const purpleInvert = findColorInvert(theme.vars.purple);
-  const redInvert = findColorInvert(theme.vars.red);
+  const yellowInvert = usr.yellowInvert || findColorInvert(theme.init.yellow);
+  const greenInvert = usr.greenInvert || findColorInvert(theme.init.green);
+  const turquoiseInvert =
+    usr.turquoiseInvert || findColorInvert(theme.init.turquoise);
+  const cyanInvert = usr.cyanInvert || findColorInvert(theme.init.cyan);
+  const blueInvert = usr.blueInvert || findColorInvert(theme.init.blue);
+  const purpleInvert = usr.purpleInvert || findColorInvert(theme.init.purple);
+  const redInvert = usr.redInvert || findColorInvert(theme.init.red);
   const invertColor: t.IDerivedInvertColor = {
     blueInvert,
     cyanInvert,
-    dangerInvert: redInvert,
-    darkInvert: colors.light,
+    dangerInvert: usr.dangerInvert || redInvert,
+    darkInvert: usr.darkInvert || colors.light,
     greenInvert,
-    infoInvert: cyanInvert,
-    lightInvert: colors.dark,
-    orangeInvert: findColorInvert(theme.vars.orange),
-    primaryInvert: turquoiseInvert,
+    infoInvert: usr.infoInvert || cyanInvert,
+    lightInvert: usr.lightInvert || colors.dark,
+    orangeInvert: usr.orangeInvert || findColorInvert(theme.init.orange),
+    primaryInvert: usr.primaryInvert || turquoiseInvert,
     purpleInvert,
     redInvert,
-    successInvert: greenInvert,
+    successInvert: usr.successInvert || greenInvert,
     turquoiseInvert,
-    warningInvert: yellowInvert,
+    warningInvert: usr.warningInvert || yellowInvert,
     yellowInvert,
   };
 
-  const background = theme.vars.whiteTer;
+  const background = usr.background || theme.init.whiteTer;
   const generalColors: t.IDerivedGeneralColor = {
     background,
-    border: theme.vars.greyLighter,
-    borderHover: theme.vars.greyLight,
+    border: usr.border || theme.init.greyLighter,
+    borderHover: usr.borderHover || theme.init.greyLight,
   };
 
-  const text = theme.vars.greyDark;
+  const text = usr.text || theme.init.greyDark;
   const textColors: t.IDerivedTextColor = {
     text,
-    textInvert: findColorInvert(text),
-    textLight: theme.vars.grey,
-    textStrong: theme.vars.greyDarker,
+    textInvert: usr.textInvert || findColorInvert(text),
+    textLight: usr.textLight || theme.init.grey,
+    textStrong: usr.textStrong || theme.init.greyDarker,
   };
 
   const codeColors: t.IDerivedCodeColor = {
-    code: theme.vars.red,
-    codeBackground: background,
-    pre: text,
-    preBackground: background,
+    code: usr.code || theme.init.red,
+    codeBackground: usr.codeBackground || background,
+    pre: usr.pre || text,
+    preBackground: usr.preBackground || background,
   };
 
   const linkColors: t.IDerivedLinkColor = {
-    link: theme.vars.blue,
-    linkActive: theme.vars.greyDarker,
-    linkActiveBorder: theme.vars.greyDark,
-    linkFocus: theme.vars.greyDarker,
-    linkFocusBorder: theme.vars.blue,
-    linkHover: theme.vars.greyDarker,
-    linkHoverBorder: theme.vars.greyLight,
-    linkInvert: blueInvert,
-    linkVisited: theme.vars.purple,
+    link: usr.link || theme.init.blue,
+    linkActive: usr.linkActive || theme.init.greyDarker,
+    linkActiveBorder: usr.linkActiveBorder || theme.init.greyDark,
+    linkFocus: usr.linkFocus || theme.init.greyDarker,
+    linkFocusBorder: usr.linkFocusBorder || theme.init.blue,
+    linkHover: usr.linkHover || theme.init.greyDarker,
+    linkHoverBorder: usr.linkHoverBorder || theme.init.greyLight,
+    linkInvert: usr.linkInvert || blueInvert,
+    linkVisited: usr.linkVisited || theme.init.purple,
   };
 
   const typo: t.IDerivedTypo = {
-    familyCode: theme.vars.familyMonospace,
-    familyPrimary: theme.vars.familySansSerif,
-    sizeLarge: theme.vars.size4,
-    sizeMedium: theme.vars.size5,
-    sizeNormal: theme.vars.size6,
-    sizeSmall: theme.vars.size7,
+    familyCode: usr.familyCode || theme.init.familyMonospace,
+    familyPrimary: usr.familyPrimary || theme.init.familySansSerif,
+    sizeLarge: usr.sizeLarge || theme.init.size4,
+    sizeMedium: usr.sizeMedium || theme.init.size5,
+    sizeNormal: usr.sizeNormal || theme.init.size6,
+    sizeSmall: usr.sizeSmall || theme.init.size7,
   };
 
-  const colorTuple: t.IDerivedColorTuple = {
-    black: [theme.vars.black, theme.vars.white],
+  const colorTuple: t.IDerivedColorTuple = usr.colors || {
+    black: [theme.init.black, theme.init.white],
     danger: [colors.danger, invertColor.dangerInvert],
     dark: [colors.dark, invertColor.darkInvert],
     info: [colors.info, invertColor.infoInvert],
@@ -108,28 +110,28 @@ export function createDerivedVars(
     primary: [colors.primary, invertColor.primaryInvert],
     success: [colors.success, invertColor.successInvert],
     warning: [colors.warning, invertColor.warningInvert],
-    white: [theme.vars.white, theme.vars.black],
+    white: [theme.init.white, theme.init.black],
   };
 
-  const shades: t.IDerivedShade = {
-    blackBis: theme.vars.blackBis,
-    blackTer: theme.vars.blackTer,
-    grey: theme.vars.grey,
-    greyDark: theme.vars.greyDark,
-    greyDarker: theme.vars.greyDarker,
-    greyLight: theme.vars.greyLight,
-    whiteBis: theme.vars.whiteBis,
-    whiteTer: theme.vars.whiteTer,
+  const shades: t.IDerivedShade = usr.shades || {
+    blackBis: theme.init.blackBis,
+    blackTer: theme.init.blackTer,
+    grey: theme.init.grey,
+    greyDark: theme.init.greyDark,
+    greyDarker: theme.init.greyDarker,
+    greyLight: theme.init.greyLight,
+    whiteBis: theme.init.whiteBis,
+    whiteTer: theme.init.whiteTer,
   };
 
-  const sizes = [
-    theme.vars.size1,
-    theme.vars.size2,
-    theme.vars.size3,
-    theme.vars.size4,
-    theme.vars.size5,
-    theme.vars.size6,
-    theme.vars.size7,
+  const sizes = usr.sizes || [
+    theme.init.size1,
+    theme.init.size2,
+    theme.init.size3,
+    theme.init.size4,
+    theme.init.size5,
+    theme.init.size6,
+    theme.init.size7,
   ];
 
   return {
