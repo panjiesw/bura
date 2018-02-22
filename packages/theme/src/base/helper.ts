@@ -112,8 +112,8 @@ const makeTextAlignments = (theme: t.ITheme) =>
 const makeTextColors = (theme: t.ITheme): t.IHelperTextColor =>
   Object.keys(theme.derived.colors).reduce(
     (acc, curr) => {
-      const color: ColorHelper = theme.derived.colors[curr];
-      const cls = `hasText${upperFirst(curr)}${curr.slice(1)}`;
+      const color: ColorHelper = theme.derived.colors[curr][0];
+      const cls = `hasText${upperFirst(curr)}`;
       acc[cls] = style({
         $debugName: theme.options.debug ? hyphen(cls) : undefined,
         $nest: {
@@ -136,11 +136,12 @@ const makeTextShades = (theme: t.ITheme): t.IHelperTextShade =>
   Object.keys(theme.derived.shades).reduce(
     (acc, curr) => {
       const color: ColorHelper = theme.derived.shades[curr];
-      const cls = `hasText${upperFirst(curr)}${curr.slice(1)}`;
+      const cls = `hasText${upperFirst(curr)}`;
       acc[cls] = style({
         $debugName: theme.options.debug ? hyphen(cls) : undefined,
         color: important(`${color}`),
       });
+      return acc;
     },
     {} as any,
   );

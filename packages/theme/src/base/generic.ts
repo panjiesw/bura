@@ -53,6 +53,10 @@ export function writeGenericRule(theme: t.ITheme) {
     overflowY: 'scroll',
     textRendering: theme.generic.bodyRendering,
     textSizeAdjust: percent(100),
+    // tslint:disable-next-line:object-literal-sort-keys
+    '-webkit-text-size-adjust': percent(100),
+    '-moz-text-size-adjust': percent(100),
+    '-ms-text-size-adjust': percent(100),
   });
 
   cssRule('article, aside, figure, footer, header, hgroup, section', {
