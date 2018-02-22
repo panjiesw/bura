@@ -26,6 +26,8 @@
     "test": "run-p t:*"
   },
   "devDependencies": {
+    "commitizen": "^2.9.6",
+    "cz-conventional-changelog": "^2.1.0",
     "husky": "^0.14.3",
     "lerna": "^2.8.0",
     "lint-staged": "^6.1.0",
@@ -35,5 +37,10 @@
     "tslint-config-prettier": "^1.8.0",
     "tslint-react": "^3.5.1",
     "typescript": "^2.7.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   }
 }

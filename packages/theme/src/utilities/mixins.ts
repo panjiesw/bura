@@ -29,6 +29,7 @@ import {
 import { media, style } from 'typestyle';
 import { NestedCSSProperties } from 'typestyle/lib/types';
 import * as t from '../types';
+import { prefix } from '../utils';
 
 export class Mixin implements t.IMixin {
   public classes: t.IMixinClass;
@@ -67,15 +68,15 @@ export class Mixin implements t.IMixin {
         $nest: {
           span: {
             $nest: {
-              '&:nth-child(1)': {
+              '&:nth-child(1)': prefix({
                 transform: `${translateY(px(5))} ${rotate(deg(45))}`,
-              },
+              }),
               '&:nth-child(2)': {
                 opacity: 0,
               },
-              '&:nth-child(3)': {
+              '&:nth-child(3)': prefix({
                 transform: `${translateY(px(-5))} ${rotate(deg(-45))}`,
-              },
+              }),
             },
           },
         },
@@ -83,19 +84,20 @@ export class Mixin implements t.IMixin {
     };
   }
 
-  public arrow = (color: ColorHelper): NestedCSSProperties => ({
-    border: `1px solid ${color}`,
-    borderRight: 0,
-    borderTop: 0,
-    content: ' ',
-    display: 'block',
-    height: em(0.5),
-    pointerEvents: 'none',
-    position: 'absolute',
-    transform: rotate(deg(-45)),
-    transformOrigin: 'center',
-    width: em(0.5),
-  });
+  public arrow = (color: ColorHelper): NestedCSSProperties =>
+    prefix({
+      border: `1px solid ${color}`,
+      borderRight: 0,
+      borderTop: 0,
+      content: ' ',
+      display: 'block',
+      height: em(0.5),
+      pointerEvents: 'none',
+      position: 'absolute',
+      transform: rotate(deg(-45)),
+      transformOrigin: 'center',
+      width: em(0.5),
+    });
 
   public block = (): NestedCSSProperties => ({
     $nest: {
@@ -126,16 +128,17 @@ export class Mixin implements t.IMixin {
   });
 
   public delete = (): NestedCSSProperties => ({
+    ...prefix({
+      appearance: 'none',
+      flexGrow: 0,
+      flexShrink: 0,
+    }),
     ...this.unselectable(),
-    '-moz-appearance': 'none',
-    '-webkit-appearance': 'none',
     backgroundColor: `${this.theme.init.black.fade(0.2)}`,
     border: 'none',
     borderRadius: this.theme.init.radiusRounded,
     cursor: 'pointer',
     display: 'inline-block',
-    flexGrow: 0,
-    flexShrink: 0,
     fontSize: 0,
     height: px(20),
     maxHeight: px(20),
@@ -149,16 +152,18 @@ export class Mixin implements t.IMixin {
     // tslint:disable-next-line:object-literal-sort-keys
     $nest: {
       '&:before, &:after': {
+        ...prefix({
+          transform: `${translateX(percent(-50))} ${translateY(
+            percent(-50),
+          )} ${rotate(deg(45))}`,
+          transformOrigin: 'center center',
+        }),
         backgroundColor: `${this.theme.init.white}`,
         content: '""',
         display: 'block',
         left: percent(50),
         position: 'absolute',
         top: percent(50),
-        transform: `${translateX(percent(-50))} ${translateY(
-          percent(-50),
-        )} ${rotate(deg(45))}`,
-        transformOrigin: 'center center',
       },
       // tslint:disable-next-line:object-literal-sort-keys
       '&:before': {
@@ -200,15 +205,17 @@ export class Mixin implements t.IMixin {
     // tslint:disable-next-line:object-literal-sort-keys
     $nest: {
       span: {
+        ...prefix({
+          transformOrigin: 'center',
+          transitionDuration: this.theme.init.speed,
+          transitionProperty: 'background-color, opacity, transform',
+          transitionTimingFunction: this.theme.init.easing,
+        }),
         backgroundColor: 'currentColor',
         display: 'block',
         height: px(1),
         left: calc(`${percent(50)} - ${px(8)}`),
         position: 'absolute',
-        transformOrigin: 'center',
-        transitionDuration: this.theme.init.speed,
-        transitionProperty: 'background-color, opacity, transform',
-        transitionTimingFunction: this.theme.init.easing,
         width: px(16),
 
         $nest: {
@@ -264,13 +271,10 @@ export class Mixin implements t.IMixin {
     },
   });
 
-  public unselectable = (): NestedCSSProperties => ({
-    '-moz-user-select': 'none',
-    '-ms-user-select': 'none',
-    '-webkit-touch-callout': 'none',
-    '-webkit-user-select': 'none',
-    userSelect: 'none',
-  });
+  public unselectable = (): NestedCSSProperties =>
+    prefix({
+      userSelect: 'none',
+    });
 
   public from = (
     device: string | number,

@@ -14,7 +14,9 @@
  *    limitations under the License.
  */
 
+import { supportedProperty, supportedValue } from 'css-vendor';
 import { ColorHelper, rgba, white } from 'csx';
+import { CSSProperties } from 'typestyle/lib/types';
 
 export function powerNumber(num: number, exp: number): number {
   let value = 1;
@@ -64,8 +66,12 @@ export function findColorInvert(color: ColorHelper): ColorHelper {
   return white;
 }
 
-export function hyphen(str: string): string {
+export function camelToDash(str: string): string {
   return str.replace(/([a-zA-Z0-9])(?=[A-Z0-9])/g, '$1-').toLowerCase();
+}
+
+export function dashToCamel(str: string): string {
+  return str.replace(/(\-[a-z0-9])/ig, s => s.toUpperCase());
 }
 
 export function lowerFirst(str: string): string {
@@ -75,3 +81,32 @@ export function lowerFirst(str: string): string {
 export function upperFirst(str: string): string {
   return `${str.charAt(0).toUpperCase()}${str.slice(1)}`;
 }
+
+export function merge(object: any, ...src: any[]): any {
+  for (let i = 0, l = src.length, s; i < l; i++) {
+    s = src[i];
+    for (const idx in s) {
+      if (s.hasOwnProperty(idx) && s[idx]) {
+        object[idx as any] = s[idx];
+      }
+    }
+  }
+  return object as any;
+}
+
+export const prefix = (props: CSSProperties): CSSProperties =>
+  Object.keys(props)
+    .reduce<CSSProperties>((acc, prop) => {
+      const dash = camelToDash(prop);
+      const p = supportedProperty(dash);
+      if (p !== false && dashToCamel(p) !== prop) {
+        acc[p] = props[prop];
+        return acc;
+      }
+
+      const v = supportedValue(dash, props[prop]);
+      if (v !== false) {
+        acc[prop] = v;
+      }
+      return acc;
+    }, props);

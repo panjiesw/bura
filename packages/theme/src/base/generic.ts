@@ -17,6 +17,7 @@
 import { em, percent, px, rem } from 'csx';
 import { cssRule } from 'typestyle';
 import * as t from '../types';
+import { prefix } from '../utils';
 
 export function createGenericVars(
   theme: t.ITheme,
@@ -42,126 +43,201 @@ export function createGenericVars(
   };
 }
 
-export function writeGenericRule(theme: t.ITheme) {
-  cssRule('html', {
-    '-moz-osx-font-smoothing': 'grayscale',
-    '-webkit-font-smoothing': 'antialiased',
-    backgroundColor: `${theme.generic.bodyBackgroundColor}`,
-    fontSize: theme.generic.bodySize,
-    minWidth: px(300),
-    overflowX: 'hidden',
-    overflowY: 'scroll',
-    textRendering: theme.generic.bodyRendering,
-    textSizeAdjust: percent(100),
-    // tslint:disable-next-line:object-literal-sort-keys
-    '-webkit-text-size-adjust': percent(100),
-    '-moz-text-size-adjust': percent(100),
-    '-ms-text-size-adjust': percent(100),
-  });
+export function rule1(generic: Partial<t.IGenericVariable>) {
+  cssRule(
+    'html',
+    prefix({
+      '-moz-osx-font-smoothing': 'grayscale',
+      '-webkit-font-smoothing': 'antialiased',
+      backgroundColor: `${generic.bodyBackgroundColor}`,
+      fontSize: generic.bodySize,
+      minWidth: px(300),
+      overflowX: 'hidden',
+      overflowY: 'scroll',
+      textRendering: generic.bodyRendering,
+      textSizeAdjust: percent(100),
+    }),
+  );
+}
 
-  cssRule('article, aside, figure, footer, header, hgroup, section', {
-    display: 'block',
-  });
+export function rule2() {
+  cssRule(
+    'article, aside, figure, footer, header, hgroup, section',
+    prefix({
+      display: 'block',
+    }),
+  );
+}
 
-  cssRule('body, button, input, select, textarea', {
-    fontFamily: theme.generic.bodyFamily,
-  });
+export function rule3(generic: Partial<t.IGenericVariable>) {
+  cssRule(
+    'body, button, input, select, textarea',
+    prefix({
+      fontFamily: generic.bodyFamily,
+    }),
+  );
+}
 
-  cssRule('code, pre', {
-    '-moz-osx-font-smoothing': 'auto',
-    '-webkit-font-smoothing': 'auto',
-    fontFamily: theme.generic.codeFamily,
-  });
+export function rule4(generic: Partial<t.IGenericVariable>) {
+  cssRule(
+    'code, pre',
+    prefix({
+      '-moz-osx-font-smoothing': 'auto',
+      '-webkit-font-smoothing': 'auto',
+      fontFamily: generic.codeFamily,
+    }),
+  );
+}
 
-  cssRule('body', {
-    color: `${theme.generic.bodyColor}`,
-    fontSize: rem(1),
-    fontWeight: theme.generic.bodyWeight,
-    lineHeight: theme.generic.bodyLineHeight,
-  });
+export function rule5(generic: Partial<t.IGenericVariable>) {
+  cssRule(
+    'body',
+    prefix({
+      color: `${generic.bodyColor}`,
+      fontSize: rem(1),
+      fontWeight: generic.bodyWeight,
+      lineHeight: generic.bodyLineHeight,
+    }),
+  );
+}
 
-  cssRule('a', {
-    color: `${theme.derived.link}`,
-    cursor: 'pointer',
-    textDecoration: 'none',
-    // tslint:disable-next-line:object-literal-sort-keys
-    $nest: {
-      '&:hover': {
-        color: `${theme.derived.linkHover}`,
-      },
-      strong: {
-        color: 'currentColor',
+export function rule6(derived: Partial<t.IDerivedVariable>) {
+  cssRule(
+    'a',
+    prefix({
+      color: `${derived.link}`,
+      cursor: 'pointer',
+      textDecoration: 'none',
+    }),
+    {
+      $nest: {
+        '&:hover': {
+          color: `${derived.linkHover}`,
+        },
+        strong: {
+          color: 'currentColor',
+        },
       },
     },
-  });
-
-  cssRule('code', {
-    backgroundColor: `${theme.derived.codeBackground}`,
-    color: `${theme.derived.code}`,
-    fontSize: theme.generic.codeSize,
-    fontWeight: theme.generic.codeWeight,
-    padding: theme.generic.codePadding,
-  });
-
-  cssRule('hr', {
-    backgroundColor: `${theme.generic.hrBackgroundColor}`,
-    border: 'none',
-    display: 'block',
-    height: theme.generic.hrHeight,
-    margin: theme.generic.hrMargin,
-  });
-
-  cssRule('img', {
-    height: 'auto',
-    maxWidth: percent(100),
-  });
-
-  cssRule('input[type="checkbox"], input[type="radio"]', {
-    verticalAlign: 'baseline',
-  });
-
+  );
+}
+export function rule7(
+  generic: Partial<t.IGenericVariable>,
+  derived: Partial<t.IDerivedVariable>,
+) {
+  cssRule(
+    'code',
+    prefix({
+      backgroundColor: `${derived.codeBackground}`,
+      color: `${derived.code}`,
+      fontSize: generic.codeSize,
+      fontWeight: generic.codeWeight,
+      padding: generic.codePadding,
+    }),
+  );
+}
+export function rule8(generic: Partial<t.IGenericVariable>) {
+  cssRule(
+    'hr',
+    prefix({
+      backgroundColor: `${generic.hrBackgroundColor}`,
+      border: 'none',
+      display: 'block',
+      height: generic.hrHeight,
+      margin: generic.hrMargin,
+    }),
+  );
+}
+export function rule9() {
+  cssRule(
+    'img',
+    prefix({
+      height: 'auto',
+      maxWidth: percent(100),
+    }),
+  );
+}
+export function rule10() {
+  cssRule(
+    'input[type="checkbox"], input[type="radio"]',
+    prefix({
+      verticalAlign: 'baseline',
+    }),
+  );
+}
+export function rule11() {
   cssRule('small', {
     fontSize: em(0.875),
   });
-
-  cssRule('span', {
-    fontStyle: 'inherit',
-    fontWeight: 'inherit',
-  });
-
+}
+export function rule12() {
+  cssRule(
+    'span',
+    prefix({
+      fontStyle: 'inherit',
+      fontWeight: 'inherit',
+    }),
+  );
+}
+export function rule13(generic: Partial<t.IGenericVariable>) {
   cssRule('strong', {
-    color: `${theme.generic.strongColor}`,
-    fontWeight: theme.generic.strongWeight,
+    color: `${generic.strongColor}`,
+    fontWeight: generic.strongWeight,
   });
-
-  cssRule('pre', theme.mixins.overflowTouch(), {
-    backgroundColor: `${theme.derived.preBackground}`,
-    color: `${theme.derived.pre}`,
-    fontSize: em(0.875),
-    overflowX: 'auto',
-    padding: `${rem(1.25)} ${rem(1.5)}`,
-    whiteSpace: 'pre',
-    wordWrap: 'normal',
-    // tslint:disable-next-line:object-literal-sort-keys
-    $nest: {
-      code: {
-        backgroundColor: 'transparent',
-        color: 'currentColor',
-        fontSize: em(1),
-        padding: 0,
+}
+export function rule14(derived: Partial<t.IDerivedVariable>, mixins: t.IMixin) {
+  cssRule(
+    'pre',
+    mixins.overflowTouch(),
+    prefix({
+      backgroundColor: `${derived.preBackground}`,
+      color: `${derived.pre}`,
+      fontSize: em(0.875),
+      overflowX: 'auto',
+      padding: `${rem(1.25)} ${rem(1.5)}`,
+      whiteSpace: 'pre',
+      wordWrap: 'normal',
+    }),
+    {
+      $nest: {
+        code: prefix({
+          backgroundColor: 'transparent',
+          color: 'currentColor',
+          fontSize: em(1),
+          padding: 0,
+        }),
       },
     },
-  });
-
+  );
+}
+export function rule15(derived: Partial<t.IDerivedVariable>) {
   cssRule('table', {
     $nest: {
-      'td, th': {
+      'td, th': prefix({
         textAlign: 'left',
         verticalAlign: 'top',
-      },
+      }),
       th: {
-        color: `${theme.derived.textStrong}`,
+        color: `${derived.textStrong}`,
       },
     },
   });
+}
+
+export function writeGenericRule(theme: t.ITheme) {
+  rule1(theme.generic);
+  rule2();
+  rule3(theme.generic);
+  rule4(theme.generic);
+  rule5(theme.generic);
+  rule6(theme.derived);
+  rule7(theme.generic, theme.derived);
+  rule8(theme.generic);
+  rule9();
+  rule10();
+  rule11();
+  rule12();
+  rule13(theme.generic);
+  rule14(theme.derived, theme.mixins);
+  rule15(theme.derived);
 }

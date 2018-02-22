@@ -18,7 +18,7 @@ import { ColorHelper, important } from 'csx';
 import { style } from 'typestyle';
 import { NestedCSSProperties } from 'typestyle/lib/types';
 import * as t from '../types';
-import { hyphen, lowerFirst, upperFirst } from '../utils';
+import * as utils from '../utils';
 
 interface IAlignment {
   Left: 'left';
@@ -79,7 +79,7 @@ const makeSize = <T>(theme: t.ITheme, target: '' | Responsive = '') =>
       acc[cls] = style(
         target === '' ? rule : theme.mixins[target.toLowerCase()](rule),
         {
-          $debugName: theme.options.debug ? hyphen(cls) : undefined,
+          $debugName: theme.options.debug ? utils.camelToDash(cls) : undefined,
         },
       );
       return acc;
@@ -97,9 +97,11 @@ const makeTextAlignments = (theme: t.ITheme) =>
           acc[cls] = style(
             curr === ''
               ? { textAlign }
-              : theme.mixins[lowerFirst(curr)]({ textAlign }),
+              : theme.mixins[utils.lowerFirst(curr)]({ textAlign }),
             {
-              $debugName: theme.options.debug ? hyphen(cls) : undefined,
+              $debugName: theme.options.debug
+                ? utils.camelToDash(cls)
+                : undefined,
             },
           );
         }
@@ -113,9 +115,9 @@ const makeTextColors = (theme: t.ITheme): t.IHelperTextColor =>
   Object.keys(theme.derived.colors).reduce(
     (acc, curr) => {
       const color: ColorHelper = theme.derived.colors[curr][0];
-      const cls = `hasText${upperFirst(curr)}`;
+      const cls = `hasText${utils.upperFirst(curr)}`;
       acc[cls] = style({
-        $debugName: theme.options.debug ? hyphen(cls) : undefined,
+        $debugName: theme.options.debug ? utils.camelToDash(cls) : undefined,
         $nest: {
           'a&': {
             $nest: {
@@ -136,9 +138,9 @@ const makeTextShades = (theme: t.ITheme): t.IHelperTextShade =>
   Object.keys(theme.derived.shades).reduce(
     (acc, curr) => {
       const color: ColorHelper = theme.derived.shades[curr];
-      const cls = `hasText${upperFirst(curr)}`;
+      const cls = `hasText${utils.upperFirst(curr)}`;
       acc[cls] = style({
-        $debugName: theme.options.debug ? hyphen(cls) : undefined,
+        $debugName: theme.options.debug ? utils.camelToDash(cls) : undefined,
         color: important(`${color}`),
       });
       return acc;
@@ -153,12 +155,15 @@ const makeDisplays = (theme: t.ITheme): t.IHelperDisplay =>
         if (displays.hasOwnProperty(index)) {
           const display = important(displays[index]);
           const cls = `is${index}${curr}`;
+          const rule = utils.prefix({ display });
           acc[cls] = style(
             curr === ''
-              ? { display }
-              : theme.mixins[lowerFirst(curr)]({ display }),
+              ? rule
+              : theme.mixins[utils.lowerFirst(curr)](rule),
             {
-              $debugName: theme.options.debug ? hyphen(cls) : undefined,
+              $debugName: theme.options.debug
+                ? utils.camelToDash(cls)
+                : undefined,
             },
           );
         }
@@ -179,12 +184,16 @@ const makeVisibility = (theme: t.ITheme): t.IHelperVisibility =>
         visibility: important('hidden'),
       };
       acc[clsHidden] = style(
-        curr === '' ? ruleHidden : theme.mixins[lowerFirst(curr)](ruleHidden),
-        { $debugName: debug ? hyphen(clsHidden) : undefined },
+        curr === ''
+          ? ruleHidden
+          : theme.mixins[utils.lowerFirst(curr)](ruleHidden),
+        { $debugName: debug ? utils.camelToDash(clsHidden) : undefined },
       );
       acc[clsInvis] = style(
-        curr === '' ? ruleInvis : theme.mixins[lowerFirst(curr)](ruleInvis),
-        { $debugName: debug ? hyphen(clsInvis) : undefined },
+        curr === ''
+          ? ruleInvis
+          : theme.mixins[utils.lowerFirst(curr)](ruleInvis),
+        { $debugName: debug ? utils.camelToDash(clsInvis) : undefined },
       );
 
       return acc;
